@@ -1,40 +1,19 @@
-import Image from 'next/image';
+'use client';
 
-// Mock data for featured artwork
-const featuredArtwork = [
-  {
-    id: 1,
-    title: 'Sunset Over Mountains',
-    medium: 'Oil on Canvas',
-    dimensions: '24" x 36"',
-    price: '$1,200',
-    imageUrl:
-      'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=500&fit=crop',
-    category: 'Landscape',
-  },
-  {
-    id: 2,
-    title: 'Abstract Harmony',
-    medium: 'Acrylic on Canvas',
-    dimensions: '30" x 40"',
-    price: '$1,800',
-    imageUrl:
-      'https://images.unsplash.com/photo-1549887534-1541e9326642?w=400&h=500&fit=crop',
-    category: 'Abstract',
-  },
-  {
-    id: 3,
-    title: 'Portrait of Grace',
-    medium: 'Charcoal on Paper',
-    dimensions: '18" x 24"',
-    price: '$800',
-    imageUrl:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    category: 'Portrait',
-  },
-];
+import Image from 'next/image';
+import { useArtwork } from '@/hooks/useArtwork';
 
 export default function Home() {
+  const {
+    artworks: featuredArtwork,
+    loading,
+    error,
+  } = useArtwork({
+    limit: 3,
+    sortBy: 'createdAt',
+    sortOrder: 'desc',
+  });
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -83,35 +62,68 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredArtwork.map((artwork) => (
-              <div key={artwork.id} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                  <div className="aspect-[4/5] relative">
-                    <Image
-                      src={artwork.imageUrl}
-                      alt={artwork.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                    <h3 className="text-white text-xl font-semibold mb-2">
-                      {artwork.title}
-                    </h3>
-                    <p className="text-gray-200 text-sm mb-1">
-                      {artwork.medium}
-                    </p>
-                    <p className="text-gray-200 text-sm mb-2">
-                      {artwork.dimensions}
-                    </p>
-                    <p className="text-white text-lg font-bold">
-                      {artwork.price}
-                    </p>
+            {loading ? (
+              // Skeleton loading state
+              Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-lg shadow-lg">
+                    <div className="aspect-[4/5] relative bg-gray-200 animate-pulse">
+                      <div className="absolute inset-0 bg-gray-300 animate-pulse"></div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-400/80 to-transparent p-6">
+                      <div className="h-6 bg-gray-300 rounded mb-2 animate-pulse"></div>
+                      <div className="h-4 bg-gray-300 rounded mb-1 animate-pulse"></div>
+                      <div className="h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+                      <div className="h-6 bg-gray-300 rounded animate-pulse"></div>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : error ? (
+              // Error state
+              <div className="col-span-full text-center py-12">
+                <p className="text-red-600 mb-4">
+                  Error loading featured artwork: {error}
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
+                >
+                  Try Again
+                </button>
               </div>
-            ))}
+            ) : (
+              // Actual artwork
+              featuredArtwork.map((artwork) => (
+                <div key={artwork.id} className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <div className="aspect-[4/5] relative">
+                      <Image
+                        src={artwork.imageUrl}
+                        alt={artwork.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                      <h3 className="text-white text-xl font-semibold mb-2">
+                        {artwork.title}
+                      </h3>
+                      <p className="text-gray-200 text-sm mb-1">
+                        {artwork.medium}
+                      </p>
+                      <p className="text-gray-200 text-sm mb-2">
+                        {artwork.dimensions}
+                      </p>
+                      <p className="text-white text-lg font-bold">
+                        {artwork.price}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
 
           <div className="text-center mt-12">

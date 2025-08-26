@@ -1,24 +1,72 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Quick Start
+
+1. **Clone and install dependencies:**
+
+   ```bash
+   git clone <your-repo-url>
+   cd joyce-website
+   npm install
+   ```
+
+2. **Set up environment variables:**
+
+   ```bash
+   cp .env.example .env
+   # Edit .env with your credentials
+   ```
+
+3. **Set up the database:**
+
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev
+   ```
+
+4. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open [http://localhost:3000](http://localhost:3000)** with your browser to see the result.
+
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For detailed setup instructions, see the sections below.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Database Setup
+
+### 1. Set up Environment Variables
+
+1. Copy the example environment file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Update your `.env` file with your actual credentials:
+   - Add your PostgreSQL database URL
+
+See `.env.example` for detailed descriptions of each variable.
+
+### 2. Set up Database
+
+The project uses Prisma PostgreSQL for user data persistence:
+
+```bash
+# Install dependencies
+npm install
+
+# Generate Prisma client
+npx prisma generate --no-engine
+
+# Run database migrations
+npx prisma migrate dev
+```
 
 ## Learn More
 

@@ -2,106 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-
-// Mock data for gallery artwork
-const allArtwork = [
-  {
-    id: 1,
-    title: 'Sunset Over Mountains',
-    medium: 'Oil on Canvas',
-    dimensions: '24" x 36"',
-    price: '$1,200',
-    imageUrl:
-      'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=500&fit=crop',
-    category: 'Landscape',
-    year: 2024,
-    available: true,
-  },
-  {
-    id: 2,
-    title: 'Abstract Harmony',
-    medium: 'Acrylic on Canvas',
-    dimensions: '30" x 40"',
-    price: '$1,800',
-    imageUrl:
-      'https://images.unsplash.com/photo-1549887534-1541e9326642?w=400&h=500&fit=crop',
-    category: 'Abstract',
-    year: 2024,
-    available: true,
-  },
-  {
-    id: 3,
-    title: 'Portrait of Grace',
-    medium: 'Charcoal on Paper',
-    dimensions: '18" x 24"',
-    price: '$800',
-    imageUrl:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    category: 'Portrait',
-    year: 2023,
-    available: true,
-  },
-  {
-    id: 4,
-    title: 'Ocean Waves',
-    medium: 'Watercolor on Paper',
-    dimensions: '22" x 30"',
-    price: '$950',
-    imageUrl:
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
-    category: 'Seascape',
-    year: 2024,
-    available: true,
-  },
-  {
-    id: 5,
-    title: 'Urban Night',
-    medium: 'Oil on Canvas',
-    dimensions: '36" x 48"',
-    price: '$2,200',
-    imageUrl:
-      'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=400&h=500&fit=crop',
-    category: 'Cityscape',
-    year: 2023,
-    available: false,
-  },
-  {
-    id: 6,
-    title: 'Floral Dreams',
-    medium: 'Mixed Media',
-    dimensions: '20" x 20"',
-    price: '$1,100',
-    imageUrl:
-      'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=500&fit=crop',
-    category: 'Still Life',
-    year: 2024,
-    available: true,
-  },
-  {
-    id: 7,
-    title: 'Desert Storm',
-    medium: 'Acrylic on Canvas',
-    dimensions: '40" x 60"',
-    price: '$3,500',
-    imageUrl:
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
-    category: 'Landscape',
-    year: 2024,
-    available: true,
-  },
-  {
-    id: 8,
-    title: 'Inner Thoughts',
-    medium: 'Graphite on Paper',
-    dimensions: '16" x 20"',
-    price: '$650',
-    imageUrl:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    category: 'Portrait',
-    year: 2023,
-    available: true,
-  },
-];
+import { useArtwork } from '@/hooks/useArtwork';
 
 const categories = [
   'All',
@@ -116,8 +17,9 @@ const categories = [
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('newest');
+  const { artworks, loading, error } = useArtwork({});
 
-  const filteredArtwork = allArtwork
+  const filteredArtwork = artworks
     .filter(
       (artwork) =>
         selectedCategory === 'All' || artwork.category === selectedCategory
@@ -199,7 +101,43 @@ export default function Gallery() {
       {/* Gallery Grid */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredArtwork.length === 0 ? (
+          {loading ? (
+            // Skeleton loading state
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-lg shadow-lg bg-white">
+                    <div className="aspect-[4/5] relative bg-gray-200 animate-pulse">
+                      <div className="absolute inset-0 bg-gray-300 animate-pulse"></div>
+                    </div>
+                    <div className="p-6">
+                      <div className="h-6 bg-gray-300 rounded mb-2 animate-pulse"></div>
+                      <div className="h-4 bg-gray-300 rounded mb-1 animate-pulse"></div>
+                      <div className="h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="h-6 bg-gray-300 rounded w-20 animate-pulse"></div>
+                        <div className="h-4 bg-gray-300 rounded w-12 animate-pulse"></div>
+                      </div>
+                      <div className="h-10 bg-gray-300 rounded animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : error ? (
+            // Error state
+            <div className="text-center py-12">
+              <p className="text-red-600 mb-4">
+                Error loading artwork: {error}
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
+              >
+                Try Again
+              </button>
+            </div>
+          ) : filteredArtwork.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500 text-lg">
                 No artwork found in this category.
@@ -268,7 +206,7 @@ export default function Gallery() {
               Interested in a Custom Piece?
             </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Joyce accepts commission requests for custom artwork. Let's
+              Joyce accepts commission requests for custom artwork. Let&apos;s
               discuss your vision and create something truly unique for your
               space.
             </p>
