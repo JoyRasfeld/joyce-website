@@ -1,0 +1,249 @@
+# Project Rules - Joyce Website
+
+## Project Overview
+
+This is a personal art gallery website for Joyce built with Next.js 15, TypeScript, Tailwind CSS, and Prisma. The website showcases artwork with a clean, modern design focused on visual presentation.
+
+## Code Organization
+
+- Use feature-based folder structure
+- Keep related files close together
+- Use consistent naming conventions
+- Separate concerns properly
+- Use barrel exports for clean imports
+
+## File Naming Conventions
+
+- Use kebab-case for file and folder names
+- Use PascalCase for component files
+- Use camelCase for utility files
+- Use descriptive names that indicate purpose
+- Group related files in appropriate directories
+
+## Import Organization
+
+- Group imports: external packages first, then internal modules
+- Use absolute imports with `@/` prefix for internal modules
+- Use relative imports for closely related files
+- Alphabetize imports within groups
+- Remove unused imports
+
+## Code Style
+
+- Use TypeScript for all new files
+- Prefer const over let, avoid var
+- Use meaningful variable and function names
+- Keep functions small and focused
+- Use proper indentation and spacing
+- Add JSDoc comments for complex functions
+
+## Error Handling
+
+- Use proper try-catch blocks
+- Implement meaningful error messages
+- Use custom error classes when appropriate
+- Handle errors at the appropriate level
+- Log errors for debugging
+
+## Performance
+
+- Optimize bundle size
+- Use proper caching strategies
+- Implement lazy loading when appropriate
+- Use React.memo for expensive components
+- Avoid unnecessary re-renders
+
+## Security
+
+- Validate all user inputs
+- Sanitize data before storing
+- Use HTTPS in production
+- Keep dependencies updated
+
+## Testing
+
+- Write unit tests for business logic
+- Test error scenarios
+- Use meaningful test descriptions
+- Keep tests focused and isolated
+- Use proper mocking strategies
+
+## Documentation
+
+- Document complex business logic
+- Keep README files updated
+- Use JSDoc for public APIs
+- Document environment variables
+- Maintain changelog
+
+## Git Workflow
+
+- Use descriptive commit messages
+- Keep commits focused and atomic
+- Use feature branches for new development
+- Review code before merging
+- Use conventional commit format
+
+## Environment Configuration
+
+- Use environment variables for configuration
+- Never commit secrets to version control
+- Use .env.local for local development
+- Document required environment variables
+- Use proper validation for env vars
+
+## Current Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── api/               # API routes
+│   │   └── artwork/       # Artwork API endpoints
+│   ├── about/             # About page
+│   ├── contact/           # Contact page
+│   ├── gallery/           # Artwork gallery page
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── components/             # Reusable components
+│   └── Navigation.tsx     # Main navigation component
+├── hooks/                  # Custom React hooks
+│   └── useArtwork.ts      # Artwork data hook
+├── lib/                    # Utilities and configurations
+│   └── prisma.ts          # Prisma client configuration
+└── types/                  # TypeScript type definitions
+    ├── artwork.ts          # Artwork type definitions
+    └── index.ts            # Type exports
+```
+
+## Example Import Organization
+
+```typescript
+// External packages (alphabetically ordered)
+import { useState, useCallback, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+// Internal modules (alphabetically ordered)
+import { Navigation } from '@/components/Navigation';
+import { useArtwork } from '@/hooks/useArtwork';
+import type { Artwork } from '@/types';
+```
+
+## Example Error Handling
+
+```typescript
+// Custom error classes
+export class AppError extends Error {
+  constructor(
+    message: string,
+    public code: string,
+    public statusCode: number = 500
+  ) {
+    super(message);
+    this.name = 'AppError';
+  }
+}
+
+// Proper error handling
+export async function handleApiCall<T>(
+  apiCall: () => Promise<T>
+): Promise<{ data: T | null; error: string | null }> {
+  try {
+    const data = await apiCall();
+    return { data, error: null };
+  } catch (error) {
+    console.error('API call failed:', error);
+
+    if (error instanceof AppError) {
+      return { data: null, error: error.message };
+    }
+
+    return { data: null, error: 'An unexpected error occurred' };
+  }
+}
+```
+
+## Example Component Structure
+
+```typescript
+import { useState, useCallback } from 'react';
+import { useArtwork } from '@/hooks/useArtwork';
+import type { Artwork } from '@/types';
+
+interface ArtworkGalleryProps {
+  category?: string;
+  onArtworkSelect?: (artwork: Artwork) => void;
+}
+
+export function ArtworkGallery({
+  category,
+  onArtworkSelect,
+}: ArtworkGalleryProps) {
+  const { artwork, loading, error } = useArtwork({ category });
+  const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+
+  const handleArtworkClick = useCallback(
+    (artwork: Artwork) => {
+      setSelectedArtwork(artwork);
+      onArtworkSelect?.(artwork);
+    },
+    [onArtworkSelect]
+  );
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div className="grid gap-4">
+      {artwork.map((piece) => (
+        <div
+          key={piece.id}
+          onClick={() => handleArtworkClick(piece)}
+          className="cursor-pointer"
+        >
+          <h3>{piece.title}</h3>
+          <p>{piece.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## Environment Variables Example
+
+```typescript
+// src/lib/env.ts
+import { z } from 'zod';
+
+const envSchema = z.object({
+  DATABASE_URL: z.string().url(),
+  // Add other environment variables as needed
+});
+
+export const env = envSchema.parse(process.env);
+```
+
+## Git Commit Message Format
+
+```
+type(scope): description
+
+[optional body]
+
+[optional footer]
+```
+
+Examples:
+
+- `feat(gallery): add artwork filtering by category`
+- `fix(api): resolve artwork image loading issue`
+- `docs(readme): update installation instructions`
+- `refactor(components): extract reusable gallery component`
+
+---
