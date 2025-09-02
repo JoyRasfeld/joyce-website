@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -9,92 +9,334 @@ async function main() {
   // Seed artwork data
   const artworks = [
     {
-      title: 'Sunset Over Mountains',
-      medium: 'Oil on Canvas',
-      dimensions: '24" x 36"',
-      price: '$1,200',
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
       imageUrl:
-        'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=500&fit=crop',
-      category: 'Landscape',
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756695109/IMG_3329_xnr5wq.jpg",
+      category: "My Mini",
       year: 2024,
-      available: true,
+      available: false,
     },
     {
-      title: 'Abstract Harmony',
-      medium: 'Acrylic on Canvas',
-      dimensions: '30" x 40"',
-      price: '$1,800',
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
       imageUrl:
-        'https://images.unsplash.com/photo-1549887534-1541e9326642?w=400&h=500&fit=crop',
-      category: 'Abstract',
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756695109/IMG_2847_2_goi8un.jpg",
+      category: "My Mini",
       year: 2024,
-      available: true,
+      available: false,
     },
     {
-      title: 'Portrait of Grace',
-      medium: 'Charcoal on Paper',
-      dimensions: '18" x 24"',
-      price: '$800',
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
       imageUrl:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-      category: 'Portrait',
-      year: 2023,
-      available: true,
-    },
-    {
-      title: 'Ocean Waves',
-      medium: 'Watercolor on Paper',
-      dimensions: '22" x 30"',
-      price: '$950',
-      imageUrl:
-        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
-      category: 'Seascape',
-      year: 2024,
-      available: true,
-    },
-    {
-      title: 'Urban Night',
-      medium: 'Oil on Canvas',
-      dimensions: '36" x 48"',
-      price: '$2,200',
-      imageUrl:
-        'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=400&h=500&fit=crop',
-      category: 'Cityscape',
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756695109/IMG_3328_vmdvkl.jpg",
+      category: "My Mini",
       year: 2023,
       available: false,
     },
     {
-      title: 'Floral Dreams',
-      medium: 'Mixed Media',
-      dimensions: '20" x 20"',
-      price: '$1,100',
+      title: "Pastel Blue Victorian",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
       imageUrl:
-        'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=500&fit=crop',
-      category: 'Still Life',
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/pastel-blue-victorian_mrfaeb.jpg",
+      category: "My Mini",
       year: 2024,
-      available: true,
+      available: false,
     },
     {
-      title: 'Desert Storm',
-      medium: 'Acrylic on Canvas',
-      dimensions: '40" x 60"',
-      price: '$3,500',
+      title: "Multi-Colored Brick Cottage",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
       imageUrl:
-        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=500&fit=crop',
-      category: 'Landscape',
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/multi-colored-brick-cottage_ffshha.jpg",
+      category: "My Mini",
       year: 2024,
-      available: true,
+      available: false,
     },
     {
-      title: 'Inner Thoughts',
-      medium: 'Graphite on Paper',
-      dimensions: '16" x 20"',
-      price: '$650',
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
       imageUrl:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-      category: 'Portrait',
-      year: 2023,
-      available: true,
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/IMG_9800_upiriq.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/IMG_9815_ds5zso.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/IMG_9861_hf6aif.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/IMG_8970_ksjlrb.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/IMG_8964_vazkt2.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694768/IMG_8963_wrnmaq.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694767/IMG_8962_aa9bfx.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_7522_qth7is.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_8293_ncbgzg.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_6595_vrqpxd.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_6442_pfw8cj.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_6142_ewsste.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_6135_g0ofjr.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_5921_zq013p.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_6118_ueoqv8.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_5920_rb9ucv.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694758/IMG_5791_pgs0fj.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/IMG_5825_bojmds.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/IMG_5824_nxiimr.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/IMG_5715_qffynm.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/IMG_2847_np9xk0.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/IMG_5153_gc1v5t.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/IMG_5659_bddwcm.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "My Mini",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/IMG_5178_yrxbxo.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
+    },
+    {
+      title: "Two-Story Family Home",
+      medium: "PLA, Acrylic",
+      dimensions: '6" x 4"',
+      price: "N/A",
+      imageUrl:
+        "https://res.cloudinary.com/dw3nx5fen/image/upload/v1756694757/two-story-family-home.jpg_g8jatg.jpg",
+      category: "My Mini",
+      year: 2024,
+      available: false,
     },
   ];
 
@@ -104,7 +346,7 @@ async function main() {
     });
   }
 
-  console.log('Database seeded successfully!');
+  console.log("Database seeded successfully!");
 }
 
 main()
