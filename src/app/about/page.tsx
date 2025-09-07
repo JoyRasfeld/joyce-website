@@ -21,8 +21,8 @@ export default function About() {
       {/* Artist Story */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+            <div className="lg:col-span-2">
               <h2 className="text-3xl font-bold text-earth-brown mb-6">
                 My Journey
               </h2>
@@ -46,12 +46,12 @@ export default function About() {
               </p>
             </div>
             <div className="relative">
-              <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+              <div className="aspect-square rounded-lg overflow-hidden shadow-xl bg-peach w-80 h-80 mx-auto">
                 <Image
-                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=600&h=600&fit=crop"
+                  src="/images/me.png"
                   alt="Joyce in her studio"
-                  width={600}
-                  height={600}
+                  width={320}
+                  height={320}
                   className="object-cover w-full h-full"
                 />
               </div>
