@@ -1,8 +1,9 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Soft peach background with warm brown foreground for earth-tone theme */
+  --background: #fcebdd; /* very light peach */
+  --foreground: #5b4636; /* warm brown */
 }
 
 @theme inline {
@@ -22,4 +23,59 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-playfair-display), serif;
+}
+
+/* Layered soft pink and lavender accents reminiscent of florals */
+.bg-peach-floral {
+  background-color: #fcebdd;
+  background-image: radial-gradient(
+      1200px 600px at 10% 10%,
+      rgba(225, 170, 190, 0.18),
+      rgba(225, 170, 190, 0) 60%
+    ),
+    radial-gradient(
+      900px 500px at 80% 12%,
+      rgba(196, 173, 223, 0.18),
+      rgba(196, 173, 223, 0) 60%
+    ),
+    radial-gradient(
+      700px 400px at 85% 70%,
+      rgba(241, 201, 210, 0.22),
+      rgba(241, 201, 210, 0) 60%
+    ),
+    radial-gradient(
+      700px 400px at 20% 80%,
+      rgba(210, 190, 230, 0.16),
+      rgba(210, 190, 230, 0) 60%
+    );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Earth-tone helpers */
+.text-earth-brown {
+  color: #5b4636;
+}
+.text-earth-brown-2 {
+  color: #6b5849;
+}
+.text-earth-green {
+  color: #3f6f54;
+}
+.bg-earth-green {
+  background-color: #3f6f54;
+}
+.border-peach {
+  border-color: #f2d7c3;
+}
+.bg-peach {
+  background-color: #fcebdd;
+}
+.bg-peach-light {
+  background-color: #fff5ee;
+}
+
+/* Homepage background */
+.bg-homepage {
+  background-color: #fffbf7;
 }

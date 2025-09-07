@@ -30,15 +30,15 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-homepage">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-[#F6E4F6] to-[#E8D5E8]">
+      <section className="relative py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl font-bold text-earth-brown mb-6">
               Get in Touch
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-earth-brown-2 max-w-3xl mx-auto">
               Have a question about my artwork? Interested in a commission?
               I&apos;d love to hear from you and discuss how we can work
               together.
@@ -53,7 +53,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl font-bold text-earth-brown mb-6">
                 Send a Message
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -61,7 +61,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-sm font-medium text-earth-brown-2 mb-2"
                     >
                       Name *
                     </label>
@@ -72,14 +72,14 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-sm font-medium text-earth-brown-2 mb-2"
                     >
                       Email *
                     </label>
@@ -90,7 +90,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -99,7 +99,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-earth-brown-2 mb-2"
                   >
                     Subject *
                   </label>
@@ -109,7 +109,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70"
                   >
                     <option value="">Select a subject</option>
                     <option value="Artwork Inquiry">Artwork Inquiry</option>
@@ -125,7 +125,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-earth-brown-2 mb-2"
                   >
                     Message *
                   </label>
@@ -136,14 +136,14 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70"
                     placeholder="Tell me about your inquiry..."
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-200"
+                  className="w-full bg-earth-green text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200"
                 >
                   Send Message
                 </button>
@@ -152,20 +152,20 @@ export default function Contact() {
 
             {/* Contact Information */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl font-bold text-earth-brown mb-6">
                 Contact Information
               </h2>
 
               <div className="space-y-8">
                 {/* Studio Address */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  <h3 className="text-lg font-semibold text-earth-brown mb-4">
                     Studio Location
                   </h3>
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-peach rounded-full flex items-center justify-center flex-shrink-0">
                       <svg
-                        className="w-4 h-4 text-purple-600"
+                        className="w-4 h-4 text-earth-green"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -185,12 +185,12 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-gray-600">
-                        123 Art Studio Lane
+                      <p className="text-earth-brown-2">
+                        Home Studio
                         <br />
                         Creative District
                         <br />
-                        San Francisco, CA 94102
+                        West Chester, OH 45241
                       </p>
                     </div>
                   </div>
@@ -198,14 +198,14 @@ export default function Contact() {
 
                 {/* Contact Details */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  <h3 className="text-lg font-semibold text-earth-brown mb-4">
                     Get in Touch
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-4">
-                      <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 bg-peach rounded-full flex items-center justify-center flex-shrink-0">
                         <svg
-                          className="w-4 h-4 text-purple-600"
+                          className="w-4 h-4 text-earth-green"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -219,16 +219,16 @@ export default function Contact() {
                         </svg>
                       </div>
                       <div>
-                        <p className="text-gray-600">
-                          joyce@joyceartstudio.com
+                        <p className="text-earth-brown-2">
+                          myminibyjoy@gmail.com
                         </p>
                       </div>
                     </div>
 
                     <div className="flex items-center space-x-4">
-                      <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 bg-peach rounded-full flex items-center justify-center flex-shrink-0">
                         <svg
-                          className="w-4 h-4 text-purple-600"
+                          className="w-4 h-4 text-earth-green"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -242,7 +242,7 @@ export default function Contact() {
                         </svg>
                       </div>
                       <div>
-                        <p className="text-gray-600">(555) 123-4567</p>
+                        <p className="text-earth-brown-2">(847) 305-9764</p>
                       </div>
                     </div>
                   </div>
@@ -250,24 +250,24 @@ export default function Contact() {
 
                 {/* Studio Hours */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  <h3 className="text-lg font-semibold text-earth-brown mb-4">
                     Studio Hours
                   </h3>
-                  <div className="space-y-2 text-gray-600">
+                  <div className="space-y-2 text-earth-brown-2">
                     <div className="flex justify-between">
                       <span>Monday - Friday</span>
-                      <span>10:00 AM - 6:00 PM</span>
+                      <span>12:00 PM - 2:00 PM</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Saturday</span>
-                      <span>11:00 AM - 4:00 PM</span>
+                      <span>6:00 PM -11:00 PM</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Sunday</span>
-                      <span>By appointment only</span>
+                      <span>Closed</span>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-500 mt-4">
+                  <p className="text-sm text-earth-brown-2 opacity-80 mt-4">
                     * Studio visits are by appointment only to ensure the best
                     experience.
                   </p>
@@ -275,16 +275,16 @@ export default function Contact() {
 
                 {/* Social Media */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  <h3 className="text-lg font-semibold text-earth-brown mb-4">
                     Follow My Work
                   </h3>
                   <div className="flex space-x-4">
                     <a
                       href="#"
-                      className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center hover:bg-purple-200 transition-colors duration-200"
+                      className="w-10 h-10 bg-peach rounded-full flex items-center justify-center hover:opacity-90 transition-colors duration-200"
                     >
                       <svg
-                        className="w-5 h-5 text-purple-600"
+                        className="w-5 h-5 text-earth-green"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -297,10 +297,10 @@ export default function Contact() {
                     </a>
                     <a
                       href="#"
-                      className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center hover:bg-purple-200 transition-colors duration-200"
+                      className="w-10 h-10 bg-peach rounded-full flex items-center justify-center hover:opacity-90 transition-colors duration-200"
                     >
                       <svg
-                        className="w-5 h-5 text-purple-600"
+                        className="w-5 h-5 text-earth-green"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -309,10 +309,10 @@ export default function Contact() {
                     </a>
                     <a
                       href="#"
-                      className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center hover:bg-purple-200 transition-colors duration-200"
+                      className="w-10 h-10 bg-peach rounded-full flex items-center justify-center hover:opacity-90 transition-colors duration-200"
                     >
                       <svg
-                        className="w-5 h-5 text-purple-600"
+                        className="w-5 h-5 text-earth-green"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -328,22 +328,22 @@ export default function Contact() {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-[#F6E4F6]">
+      <section className="py-20 bg-homepage">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-earth-brown mb-4">
               Visit the Studio
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-earth-brown-2 max-w-2xl mx-auto">
               Located in the heart of the creative district, my studio is easily
               accessible and welcomes visitors by appointment.
             </p>
           </div>
 
-          <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
+          <div className="bg-white/60 border border-peach rounded-lg h-96 flex items-center justify-center">
             <div className="text-center">
               <svg
-                className="w-16 h-16 text-gray-400 mx-auto mb-4"
+                className="w-16 h-16 text-earth-green mx-auto mb-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -361,11 +361,11 @@ export default function Contact() {
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <p className="text-gray-500">
+              <p className="text-earth-brown-2">
                 Interactive map will be integrated here
               </p>
-              <p className="text-sm text-gray-400 mt-2">
-                123 Art Studio Lane, San Francisco, CA 94102
+              <p className="text-sm text-earth-brown-2 opacity-80 mt-2">
+                West Chester, OH 45241
               </p>
             </div>
           </div>

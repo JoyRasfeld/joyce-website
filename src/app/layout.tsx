@@ -1,18 +1,18 @@
-import type { Metadata } from 'next';
-import { Playfair_Display } from 'next/font/google';
-import Navigation from './components/Navigation';
-import './globals.css';
+import type { Metadata } from "next";
+import { Playfair_Display } from "next/font/google";
+import Navigation from "../components/Navigation";
+import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
-  variable: '--font-playfair-display',
-  subsets: ['latin'],
-  display: 'swap',
+  variable: "--font-playfair-display",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: 'Joyce Art Studio - Original Artwork & Commissions',
+  title: "Joyce Art Studio - Original Artwork & Commissions",
   description:
-    'Discover unique original artwork and commissions by Joyce. Browse our collection of paintings, drawings, and custom pieces.',
+    "Discover unique original artwork and commissions by Joyce. Browse our collection of paintings, drawings, and custom pieces.",
 };
 
 export default function RootLayout({
@@ -23,39 +23,39 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfairDisplay.variable} antialiased min-h-screen bg-[#F6E4F6]`}
+        className={`${playfairDisplay.variable} antialiased min-h-screen bg-peach-floral`}
       >
         <Navigation />
         <main>{children}</main>
-        <footer className="bg-gray-50 border-t border-gray-200">
+        <footer className="bg-peach border-t border-peach">
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-lg font-semibold text-earth-brown mb-4">
                   Joyce Art Studio
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-earth-brown-2">
                   Creating unique artwork that brings beauty and inspiration to
                   your space.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-lg font-semibold text-earth-brown mb-4">
                   Quick Links
                 </h3>
                 <ul className="space-y-2">
                   <li>
                     <a
-                      href="/gallery"
-                      className="text-gray-600 hover:text-gray-900"
+                      href="/portfolio"
+                      className="text-earth-brown-2 hover:text-earth-green"
                     >
-                      Gallery
+                      Portfolio
                     </a>
                   </li>
                   <li>
                     <a
                       href="/about"
-                      className="text-gray-600 hover:text-gray-900"
+                      className="text-earth-brown-2 hover:text-earth-green"
                     >
                       About
                     </a>
@@ -63,7 +63,7 @@ export default function RootLayout({
                   <li>
                     <a
                       href="/contact"
-                      className="text-gray-600 hover:text-gray-900"
+                      className="text-earth-brown-2 hover:text-earth-green"
                     >
                       Contact
                     </a>
@@ -71,11 +71,14 @@ export default function RootLayout({
                 </ul>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-lg font-semibold text-earth-brown mb-4">
                   Connect
                 </h3>
                 <div className="flex space-x-4">
-                  <a href="#" className="text-gray-600 hover:text-gray-900">
+                  <a
+                    href="#"
+                    className="text-earth-brown-2 hover:text-earth-green"
+                  >
                     <span className="sr-only">Instagram</span>
                     <svg
                       className="h-6 w-6"
@@ -92,8 +95,8 @@ export default function RootLayout({
                 </div>
               </div>
             </div>
-            <div className="mt-8 border-t border-gray-200 pt-8">
-              <p className="text-center text-gray-600">
+            <div className="mt-8 border-t border-peach pt-8">
+              <p className="text-center text-earth-brown-2">
                 &copy; 2024 Joyce Art Studio. All rights reserved.
               </p>
             </div>

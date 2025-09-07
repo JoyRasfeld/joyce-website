@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useArtwork } from '@/hooks/useArtwork';
+import { useArtwork } from "@/hooks/useArtwork";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const {
@@ -10,52 +11,61 @@ export default function Home() {
     error,
   } = useArtwork({
     limit: 3,
-    sortBy: 'createdAt',
-    sortOrder: 'desc',
+    sortBy: "createdAt",
+    sortOrder: "desc",
   });
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-[#F6E4F6] to-[#E8D5E8]">
-        <div className="absolute inset-0 bg-black/5"></div>
+      <section className="relative min-h-screen flex items-center justify-center bg-homepage py-20">
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: "rgba(255,255,255,0)" }}
+        ></div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold text-earth-brown mb-6">
             Welcome to
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#6b5849] to-[#3f6f54] pb-4">
               Joyce Art Studio
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
-            Discover unique original artwork that brings beauty and inspiration
-            to your space. Each piece tells a story, captures emotion, and
-            transforms your environment.
+          <p className="text-lg md:text-xl text-earth-brown-2 mb-8 max-w-2xl mx-auto">
+            Experience original artwork that preserves moments, emotions and
+            personal stories. Each artwork is crafted crafted with thought and
+            heart.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/gallery"
-              className="bg-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-700 transition-colors duration-200"
+            <Link
+              href="/shop"
+              className="bg-earth-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-colors duration-200"
             >
-              Explore Gallery
-            </a>
-            <a
+              Shop Now
+            </Link>
+            <Link
+              href="/portfolio"
+              className="border-2 border-earth-green text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-earth-green hover:text-white transition-colors duration-200"
+            >
+              Explore Portfolio
+            </Link>
+            <Link
               href="/about"
-              className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-600 hover:text-white transition-colors duration-200"
+              className="border-2 border-earth-green text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-earth-green hover:text-white transition-colors duration-200"
             >
               Meet the Artist
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Featured Artwork Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-homepage">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-earth-brown mb-4">
               Featured Artwork
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-earth-brown-2 max-w-2xl mx-auto">
               A curated selection of recent pieces showcasing diverse styles and
               techniques
             </p>
@@ -127,9 +137,9 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <a
-              href="/gallery"
-              className="inline-flex items-center text-purple-600 hover:text-purple-700 font-semibold text-lg"
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center text-earth-green hover:opacity-90 font-semibold text-lg"
             >
               View All Artwork
               <svg
@@ -145,34 +155,34 @@ export default function Home() {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* About Preview Section */}
-      <section className="py-20 bg-[#F6E4F6]">
+      <section className="py-20 bg-homepage">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl font-bold text-earth-brown mb-6">
                 Meet Joyce
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="text-lg text-earth-brown-2 mb-6">
                 With over 15 years of experience in fine arts, Joyce creates
                 pieces that blend traditional techniques with contemporary
                 vision. Her work spans from intimate portraits to expansive
                 landscapes, each piece infused with emotion and meaning.
               </p>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-earth-brown-2 mb-8">
                 Based in the heart of the art community, Joyce draws inspiration
                 from nature, human emotion, and the interplay of light and
                 shadow. Her studio is a space where creativity flows freely and
                 every brushstroke tells a story.
               </p>
-              <a
+              <Link
                 href="/about"
-                className="inline-flex items-center text-purple-600 hover:text-purple-700 font-semibold text-lg"
+                className="inline-flex items-center text-earth-green hover:opacity-90 font-semibold text-lg"
               >
                 Learn More About Joyce
                 <svg
@@ -188,7 +198,7 @@ export default function Home() {
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
             <div className="relative">
               <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
@@ -206,29 +216,35 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-purple-600">
+      <section className="py-20 bg-earth-green">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Find Your Perfect Piece?
           </h2>
-          <p className="text-xl text-purple-100 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Whether you&apos;re looking for a statement piece for your home or a
             unique gift, explore our collection or inquire about custom
             commissions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/gallery"
-              className="bg-white text-purple-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
+            <Link
+              href="/shop"
+              className="bg-white text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors duration-200"
             >
-              Browse Collection
-            </a>
-            <a
+              Shop Now
+            </Link>
+            <Link
+              href="/portfolio"
+              className="bg-white text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors duration-200"
+            >
+              Browse Portfolio
+            </Link>
+            <Link
               href="/contact"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors duration-200"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-earth-green transition-colors duration-200"
             >
               Contact Joyce
-            </a>
+            </Link>
           </div>
         </div>
       </section>
