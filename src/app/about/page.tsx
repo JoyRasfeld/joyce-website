@@ -70,8 +70,8 @@ export default function About() {
               What Inspires Me
             </h2>
             <p className="text-xl text-earth-brown-2 max-w-2xl mx-auto">
-              My work draws inspiration from the natural world, human emotion,
-              and the interplay of light and shadow that surrounds us every day.
+              My work draws inspiration from the natural world, architecture,
+              and story-telling.
             </p>
           </div>
 
@@ -157,7 +157,7 @@ export default function About() {
       </section>
 
       {/* Studio */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -195,7 +195,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Process */}
       <section className="py-20 bg-homepage">

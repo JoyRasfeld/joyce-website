@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+import { isShopEnabled } from '@/lib/shop';
+
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const shopEnabled = isShopEnabled();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -33,12 +36,14 @@ export function Navigation() {
               >
                 Portfolio
               </Link>
-              <Link
-                href="/shop"
-                className="text-earth-brown-2 hover:text-earth-green px-3 py-2 text-sm font-medium"
-              >
-                Shop
-              </Link>
+              {shopEnabled && (
+                <Link
+                  href="/shop"
+                  className="text-earth-brown-2 hover:text-earth-green px-3 py-2 text-sm font-medium"
+                >
+                  Shop
+                </Link>
+              )}
               <Link
                 href="/about"
                 className="text-earth-brown-2 hover:text-earth-green px-3 py-2 text-sm font-medium"
@@ -103,13 +108,15 @@ export function Navigation() {
               >
                 Portfolio
               </Link>
-              <Link
-                href="/shop"
-                className="text-earth-brown-2 hover:text-earth-green block px-3 py-2 text-base font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Shop
-              </Link>
+              {shopEnabled && (
+                <Link
+                  href="/shop"
+                  className="text-earth-brown-2 hover:text-earth-green block px-3 py-2 text-base font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Shop
+                </Link>
+              )}
               <Link
                 href="/about"
                 className="text-earth-brown-2 hover:text-earth-green block px-3 py-2 text-base font-medium"

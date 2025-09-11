@@ -3,8 +3,11 @@
 import { useArtwork } from '@/hooks/useArtwork';
 import Image from 'next/image';
 import Link from 'next/link';
+import { isShopEnabled } from '@/lib/shop';
 
 export default function Home() {
+  const shopEnabled = isShopEnabled();
+
   const {
     artworks: featuredArtwork,
     loading,
@@ -36,15 +39,17 @@ export default function Home() {
             heart.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/shop"
-              className="bg-earth-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-colors duration-200"
-            >
-              Shop Now
-            </Link>
+            {shopEnabled && (
+              <Link
+                href="/shop"
+                className="bg-earth-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-colors duration-200"
+              >
+                Shop Now
+              </Link>
+            )}
             <Link
               href="/portfolio"
-              className="border-2 border-earth-green text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-earth-green hover:text-white transition-colors duration-200"
+              className="bg-earth-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-colors duration-200"
             >
               Explore Portfolio
             </Link>
@@ -179,8 +184,8 @@ export default function Home() {
               <p className="text-lg text-earth-brown-2 mb-8">
                 Inspired by the beauty of everyday life, Joyce often draws from
                 the colors, shapes, and spatial relationships she observes in
-                outdoor scenery. When she isn't creating, she enjoys time at
-                home with her husband, their two young children and a lively
+                outdoor scenery. When she isn&apos;t creating, she enjoys time
+                at home with her husband, their two young children and a lively
                 household of four cats.
               </p>
               <Link
@@ -230,12 +235,14 @@ export default function Home() {
             commissions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/shop"
-              className="bg-white text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors duration-200"
-            >
-              Shop Now
-            </Link>
+            {shopEnabled && (
+              <Link
+                href="/shop"
+                className="bg-white text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors duration-200"
+              >
+                Shop Now
+              </Link>
+            )}
             <Link
               href="/portfolio"
               className="bg-white text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors duration-200"

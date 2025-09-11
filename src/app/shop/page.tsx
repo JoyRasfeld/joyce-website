@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useArtwork } from '@/hooks/useArtwork';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useArtwork } from '@/hooks/useArtwork';
+import { isShopEnabled } from '@/lib/shop';
 
 const categories = [
   'All',
@@ -27,6 +29,11 @@ export default function Shop() {
   const [searchQuery, setSearchQuery] = useState('');
   const [cart, setCart] = useState<Array<{ id: number; quantity: number }>>([]);
   const [showCart, setShowCart] = useState(false);
+
+  // Redirect if shop is disabled
+  if (!isShopEnabled()) {
+    redirect('/');
+  }
 
   // Fetch artworks from database
   const {

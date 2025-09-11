@@ -1,12 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { redirect, useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+import { isShopEnabled } from '@/lib/shop';
 import type { Artwork } from '@/types';
 
 export default function ProductDetail() {
+  // Redirect if shop is disabled
+  if (!isShopEnabled()) {
+    redirect('/');
+  }
+
   const params = useParams();
   const productId = parseInt(params.id as string);
   const [quantity, setQuantity] = useState(1);

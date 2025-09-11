@@ -1,6 +1,12 @@
 import Link from 'next/link';
+import { isShopEnabled } from '@/lib/shop';
+import { redirect } from 'next/navigation';
 
 export default function CheckoutSuccess() {
+  // Redirect if shop is disabled
+  if (!isShopEnabled()) {
+    redirect('/');
+  }
   return (
     <div className="min-h-screen bg-peach-floral">
       {/* Header */}

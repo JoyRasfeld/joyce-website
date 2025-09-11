@@ -5,6 +5,8 @@ import { useArtwork } from '@/hooks/useArtwork';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { isShopEnabled } from '@/lib/shop';
+import { redirect } from 'next/navigation';
 
 interface FormData {
   // Shipping Information
@@ -37,6 +39,11 @@ interface FormData {
 }
 
 export default function Checkout() {
+  // Redirect if shop is disabled
+  if (!isShopEnabled()) {
+    redirect('/');
+  }
+
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [cart, setCart] = useState<Array<{ id: number; quantity: number }>>([]);
