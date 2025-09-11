@@ -169,16 +169,19 @@ export default function Home() {
                 Meet Joyce
               </h2>
               <p className="text-lg text-earth-brown-2 mb-6">
-                With over 15 years of experience in fine arts, Joyce creates
-                pieces that blend traditional techniques with contemporary
-                vision. Her work spans from intimate portraits to expansive
-                landscapes, each piece infused with emotion and meaning.
+                Joyce Rasfeld has been passionate about drawing since childhood,
+                finding creativity to be her natural language of expression. She
+                earned a B.S. in Studio Art and a B.F.A. in Art Education from
+                Miami University, where she deepened her love for using art as
+                both a way to understand the world and to share her perspective
+                with others.
               </p>
               <p className="text-lg text-earth-brown-2 mb-8">
-                Based in the heart of the art community, Joyce draws inspiration
-                from nature, human emotion, and the interplay of light and
-                shadow. Her studio is a space where creativity flows freely and
-                every brushstroke tells a story.
+                Inspired by the beauty of everyday life, Joyce often draws from
+                the colors, shapes, and spatial relationships she observes in
+                outdoor scenery. When she isn't creating, she enjoys time at
+                home with her husband, their two young children and a lively
+                household of four cats.
               </p>
               <Link
                 href="/about"

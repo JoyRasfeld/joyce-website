@@ -27,22 +27,24 @@ export default function About() {
                 My Journey
               </h2>
               <p className="text-lg text-earth-brown-2 mb-6">
-                My artistic journey began in childhood, where I found solace and
-                expression through drawing and painting. What started as a
-                simple hobby evolved into a lifelong passion for creating art
-                that speaks to the soul.
+                I have been passionate about drawing since childhood, finding
+                creativity to be my natural language of expression. I earned a
+                B.S. in Studio Art and a B.F.A. in Art Education from Miami
+                University, where I deepened my love for using art as both a way
+                to understand the world and to share my perspective with others.
               </p>
               <p className="text-lg text-earth-brown-2 mb-6">
-                After studying fine arts at the prestigious Art Institute, I
-                spent years developing my unique style, experimenting with
-                different mediums and techniques. Each piece I create is a
-                reflection of my experiences, emotions, and the world around me.
+                Inspired by the beauty of everyday life, I often draw from the
+                colors, shapes, and spatial relationships I observe in outdoor
+                scenery. Each piece I create is a reflection of my experiences,
+                emotions, and the world around me.
               </p>
               <p className="text-lg text-earth-brown-2">
-                Today, my studio is a sanctuary where creativity flows freely. I
+                When I'm not creating, I enjoy time at home with my husband, our
+                two young children and a lively household of four cats. I
                 believe that art has the power to transform spaces and touch
-                hearts, and I&apos;m honored to share my work with collectors
-                who appreciate the beauty and meaning behind each brushstroke.
+                hearts, and I'm honored to share my work with collectors who
+                appreciate the beauty and meaning behind each brushstroke.
               </p>
             </div>
             <div className="relative">
