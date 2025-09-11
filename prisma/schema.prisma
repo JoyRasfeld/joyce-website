@@ -6,6 +6,8 @@
 
 generator client {
   provider = "prisma-client-js"
+  // Optimize for serverless environments
+  engineType = "binary"
 }
 
 datasource db {
