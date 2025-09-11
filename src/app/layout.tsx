@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { Playfair_Display } from 'next/font/google';
 import { Toaster } from 'sonner';
 import './globals.css';
@@ -32,6 +33,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Toaster position="top-right" />
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
