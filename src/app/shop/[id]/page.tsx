@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import type { Artwork } from "@/types";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import type { Artwork } from '@/types';
 
 export default function ProductDetail() {
   const params = useParams();
@@ -23,12 +23,12 @@ export default function ProductDetail() {
         setLoading(true);
         const response = await fetch(`/api/artwork/${productId}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch product");
+          throw new Error('Failed to fetch product');
         }
         const data = await response.json();
         setProduct(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
+        setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setLoading(false);
       }
@@ -41,7 +41,7 @@ export default function ProductDetail() {
 
   // Load cart from localStorage on component mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("art-cart");
+    const savedCart = localStorage.getItem('art-cart');
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
@@ -49,14 +49,14 @@ export default function ProductDetail() {
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("art-cart", JSON.stringify(cart));
+    localStorage.setItem('art-cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = () => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === productId);
+    setCart(prevCart => {
+      const existingItem = prevCart.find(item => item.id === productId);
       if (existingItem) {
-        return prevCart.map((item) =>
+        return prevCart.map(item =>
           item.id === productId
             ? { ...item, quantity: item.quantity + quantity }
             : item
@@ -86,7 +86,7 @@ export default function ProductDetail() {
       <div className="min-h-screen bg-peach-floral flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-earth-brown mb-4">
-            {error || "Product Not Found"}
+            {error || 'Product Not Found'}
           </h1>
           <Link
             href="/shop"
@@ -164,7 +164,7 @@ export default function ProductDetail() {
                   <span>•</span>
                   <span>{product.year}</span>
                   <span>•</span>
-                  <span>{product.available ? "Available" : "Sold"}</span>
+                  <span>{product.available ? 'Available' : 'Sold'}</span>
                 </div>
               </div>
 
@@ -198,7 +198,7 @@ export default function ProductDetail() {
                   disabled={!product.available}
                   className="w-full bg-earth-green text-white py-4 px-6 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {product.available ? "Add to Cart" : "Sold"}
+                  {product.available ? 'Add to Cart' : 'Sold'}
                 </button>
 
                 {showAddedMessage && (
@@ -215,9 +215,9 @@ export default function ProductDetail() {
                     Artwork Details
                   </h3>
                   <p className="text-earth-brown-2 leading-relaxed">
-                    This original artwork by Joyce showcases{" "}
+                    This original artwork by Joyce showcases{' '}
                     {product.medium.toLowerCase()} techniques. The piece
-                    measures {product.dimensions} and was created in{" "}
+                    measures {product.dimensions} and was created in{' '}
                     {product.year}.
                   </p>
                 </div>
@@ -235,7 +235,7 @@ export default function ProductDetail() {
                       Availability
                     </h3>
                     <p className="text-earth-brown-2">
-                      {product.available ? "Available for purchase" : "Sold"}
+                      {product.available ? 'Available for purchase' : 'Sold'}
                     </p>
                   </div>
                 </div>

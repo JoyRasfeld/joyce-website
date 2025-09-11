@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useArtwork } from "@/hooks/useArtwork";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import { useArtwork } from '@/hooks/useArtwork';
+import Image from 'next/image';
 
 const categories = [
-  "All",
-  "My Mini",
-  "Landscape",
-  "Portrait",
-  "Abstract",
-  "Mixed Media",
-  "Still Life",
+  'All',
+  'My Mini',
+  'Landscape',
+  'Portrait',
+  'Abstract',
+  'Mixed Media',
+  'Still Life',
 ];
 
 export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [sortBy, setSortBy] = useState("newest");
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sortBy, setSortBy] = useState('newest');
   const { artworks } = useArtwork({});
   const [selectedImage, setSelectedImage] = useState<
     (typeof artworks)[0] | null
@@ -25,39 +25,39 @@ export default function Portfolio() {
   // Handle escape key to close modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         setSelectedImage(null);
       }
     };
 
     if (selectedImage) {
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden"; // Prevent background scrolling
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "unset";
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
     };
   }, [selectedImage]);
 
   const filteredArtwork = artworks
     .filter(
-      (artwork) =>
-        selectedCategory === "All" || artwork.category === selectedCategory
+      artwork =>
+        selectedCategory === 'All' || artwork.category === selectedCategory
     )
     .sort((a, b) => {
-      if (sortBy === "newest") return b.year - a.year;
-      if (sortBy === "oldest") return a.year - b.year;
-      if (sortBy === "price-low")
+      if (sortBy === 'newest') return b.year - a.year;
+      if (sortBy === 'oldest') return a.year - b.year;
+      if (sortBy === 'price-low')
         return (
-          parseInt(a.price.replace(/[^0-9]/g, "")) -
-          parseInt(b.price.replace(/[^0-9]/g, ""))
+          parseInt(a.price.replace(/[^0-9]/g, '')) -
+          parseInt(b.price.replace(/[^0-9]/g, ''))
         );
-      if (sortBy === "price-high")
+      if (sortBy === 'price-high')
         return (
-          parseInt(b.price.replace(/[^0-9]/g, "")) -
-          parseInt(a.price.replace(/[^0-9]/g, ""))
+          parseInt(b.price.replace(/[^0-9]/g, '')) -
+          parseInt(a.price.replace(/[^0-9]/g, ''))
         );
       return 0;
     });
@@ -96,7 +96,7 @@ export default function Portfolio() {
                 width={800}
                 height={1000}
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 rounded-b-lg">
                 <h3 className="text-2xl font-bold text-white mb-2">
@@ -142,14 +142,14 @@ export default function Portfolio() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
+              {categories.map(category => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                     selectedCategory === category
-                      ? "bg-earth-green text-white"
-                      : "bg-peach text-earth-brown-2 hover:bg-peach-light"
+                      ? 'bg-earth-green text-white'
+                      : 'bg-peach text-earth-brown-2 hover:bg-peach-light'
                   }`}
                 >
                   {category}
@@ -164,7 +164,7 @@ export default function Portfolio() {
               </label>
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                onChange={e => setSortBy(e.target.value)}
                 className="border border-peach rounded-md px-3 py-2 text-sm text-earth-brown bg-white focus:outline-none focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent"
               >
                 <option value="newest">Newest First</option>
@@ -188,7 +188,7 @@ export default function Portfolio() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredArtwork.map((artwork) => (
+              {filteredArtwork.map(artwork => (
                 <div key={artwork.id} className="group cursor-pointer">
                   <div className="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white">
                     <div

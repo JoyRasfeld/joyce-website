@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useArtwork } from "@/hooks/useArtwork";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { useArtwork } from '@/hooks/useArtwork';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   // Shipping Information
@@ -45,41 +45,41 @@ export default function Checkout() {
   const { artworks: products, loading, error } = useArtwork();
 
   const [formData, setFormData] = useState<FormData>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "United States",
-    cardNumber: "",
-    cardName: "",
-    expiryMonth: "",
-    expiryYear: "",
-    cvv: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: 'United States',
+    cardNumber: '',
+    cardName: '',
+    expiryMonth: '',
+    expiryYear: '',
+    cvv: '',
     billingSameAsShipping: true,
-    billingFirstName: "",
-    billingLastName: "",
-    billingAddress: "",
-    billingCity: "",
-    billingState: "",
-    billingZipCode: "",
-    billingCountry: "United States",
+    billingFirstName: '',
+    billingLastName: '',
+    billingAddress: '',
+    billingCity: '',
+    billingState: '',
+    billingZipCode: '',
+    billingCountry: 'United States',
   });
 
   // Load cart from localStorage on component mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("art-cart");
+    const savedCart = localStorage.getItem('art-cart');
     if (savedCart) {
       const parsedCart = JSON.parse(savedCart);
       setCart(parsedCart);
       if (parsedCart.length === 0) {
-        router.push("/shop");
+        router.push('/shop');
       }
     } else {
-      router.push("/shop");
+      router.push('/shop');
     }
   }, [router]);
 
@@ -87,14 +87,14 @@ export default function Checkout() {
     field: keyof FormData,
     value: string | boolean
   ) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [field]: value,
     }));
   };
 
-  const cartItems = cart.map((item) => {
-    const product = products.find((p) => p.id === item.id);
+  const cartItems = cart.map(item => {
+    const product = products.find(p => p.id === item.id);
     return {
       ...item,
       product: product!,
@@ -102,7 +102,7 @@ export default function Checkout() {
   });
 
   const subtotal = cartItems.reduce((total, item) => {
-    const price = parseInt(item.product.price.replace(/[^0-9]/g, ""));
+    const price = parseInt(item.product.price.replace(/[^0-9]/g, ''));
     return total + price * item.quantity;
   }, 0);
   const shipping = 0; // Free shipping
@@ -112,11 +112,11 @@ export default function Checkout() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real app, you would process the payment here
-    console.log("Order submitted:", { formData, cartItems, total });
+    console.log('Order submitted:', { formData, cartItems, total });
 
     // Clear cart and redirect to success page
-    localStorage.removeItem("art-cart");
-    router.push("/checkout/success");
+    localStorage.removeItem('art-cart');
+    router.push('/checkout/success');
   };
 
   const nextStep = () => {
@@ -203,14 +203,14 @@ export default function Checkout() {
           <div className="flex items-center justify-center space-x-8">
             <div
               className={`flex items-center space-x-2 ${
-                currentStep >= 1 ? "text-earth-green" : "text-earth-brown-2"
+                currentStep >= 1 ? 'text-earth-green' : 'text-earth-brown-2'
               }`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
                   currentStep >= 1
-                    ? "bg-earth-green text-white"
-                    : "bg-peach text-earth-brown-2"
+                    ? 'bg-earth-green text-white'
+                    : 'bg-peach text-earth-brown-2'
                 }`}
               >
                 1
@@ -219,19 +219,19 @@ export default function Checkout() {
             </div>
             <div
               className={`w-16 h-1 ${
-                currentStep >= 2 ? "bg-earth-green" : "bg-peach"
+                currentStep >= 2 ? 'bg-earth-green' : 'bg-peach'
               }`}
             ></div>
             <div
               className={`flex items-center space-x-2 ${
-                currentStep >= 2 ? "text-earth-green" : "text-earth-brown-2"
+                currentStep >= 2 ? 'text-earth-green' : 'text-earth-brown-2'
               }`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
                   currentStep >= 2
-                    ? "bg-earth-green text-white"
-                    : "bg-peach text-earth-brown-2"
+                    ? 'bg-earth-green text-white'
+                    : 'bg-peach text-earth-brown-2'
                 }`}
               >
                 2
@@ -240,19 +240,19 @@ export default function Checkout() {
             </div>
             <div
               className={`w-16 h-1 ${
-                currentStep >= 3 ? "bg-earth-green" : "bg-peach"
+                currentStep >= 3 ? 'bg-earth-green' : 'bg-peach'
               }`}
             ></div>
             <div
               className={`flex items-center space-x-2 ${
-                currentStep >= 3 ? "text-earth-green" : "text-earth-brown-2"
+                currentStep >= 3 ? 'text-earth-green' : 'text-earth-brown-2'
               }`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
                   currentStep >= 3
-                    ? "bg-earth-green text-white"
-                    : "bg-peach text-earth-brown-2"
+                    ? 'bg-earth-green text-white'
+                    : 'bg-peach text-earth-brown-2'
                 }`}
               >
                 3
@@ -283,8 +283,8 @@ export default function Checkout() {
                         type="text"
                         required
                         value={formData.firstName}
-                        onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
+                        onChange={e =>
+                          handleInputChange('firstName', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -297,8 +297,8 @@ export default function Checkout() {
                         type="text"
                         required
                         value={formData.lastName}
-                        onChange={(e) =>
-                          handleInputChange("lastName", e.target.value)
+                        onChange={e =>
+                          handleInputChange('lastName', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -311,8 +311,8 @@ export default function Checkout() {
                         type="email"
                         required
                         value={formData.email}
-                        onChange={(e) =>
-                          handleInputChange("email", e.target.value)
+                        onChange={e =>
+                          handleInputChange('email', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -325,8 +325,8 @@ export default function Checkout() {
                         type="tel"
                         required
                         value={formData.phone}
-                        onChange={(e) =>
-                          handleInputChange("phone", e.target.value)
+                        onChange={e =>
+                          handleInputChange('phone', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -339,8 +339,8 @@ export default function Checkout() {
                         type="text"
                         required
                         value={formData.address}
-                        onChange={(e) =>
-                          handleInputChange("address", e.target.value)
+                        onChange={e =>
+                          handleInputChange('address', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -353,8 +353,8 @@ export default function Checkout() {
                         type="text"
                         required
                         value={formData.city}
-                        onChange={(e) =>
-                          handleInputChange("city", e.target.value)
+                        onChange={e =>
+                          handleInputChange('city', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -367,8 +367,8 @@ export default function Checkout() {
                         type="text"
                         required
                         value={formData.state}
-                        onChange={(e) =>
-                          handleInputChange("state", e.target.value)
+                        onChange={e =>
+                          handleInputChange('state', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -381,8 +381,8 @@ export default function Checkout() {
                         type="text"
                         required
                         value={formData.zipCode}
-                        onChange={(e) =>
-                          handleInputChange("zipCode", e.target.value)
+                        onChange={e =>
+                          handleInputChange('zipCode', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -394,8 +394,8 @@ export default function Checkout() {
                       <select
                         required
                         value={formData.country}
-                        onChange={(e) =>
-                          handleInputChange("country", e.target.value)
+                        onChange={e =>
+                          handleInputChange('country', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       >
@@ -434,8 +434,8 @@ export default function Checkout() {
                         required
                         placeholder="1234 5678 9012 3456"
                         value={formData.cardNumber}
-                        onChange={(e) =>
-                          handleInputChange("cardNumber", e.target.value)
+                        onChange={e =>
+                          handleInputChange('cardNumber', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -448,8 +448,8 @@ export default function Checkout() {
                         type="text"
                         required
                         value={formData.cardName}
-                        onChange={(e) =>
-                          handleInputChange("cardName", e.target.value)
+                        onChange={e =>
+                          handleInputChange('cardName', e.target.value)
                         }
                         className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                       />
@@ -462,19 +462,19 @@ export default function Checkout() {
                         <select
                           required
                           value={formData.expiryMonth}
-                          onChange={(e) =>
-                            handleInputChange("expiryMonth", e.target.value)
+                          onChange={e =>
+                            handleInputChange('expiryMonth', e.target.value)
                           }
                           className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                         >
                           <option value="">MM</option>
                           {Array.from({ length: 12 }, (_, i) => i + 1).map(
-                            (month) => (
+                            month => (
                               <option
                                 key={month}
-                                value={month.toString().padStart(2, "0")}
+                                value={month.toString().padStart(2, '0')}
                               >
-                                {month.toString().padStart(2, "0")}
+                                {month.toString().padStart(2, '0')}
                               </option>
                             )
                           )}
@@ -487,8 +487,8 @@ export default function Checkout() {
                         <select
                           required
                           value={formData.expiryYear}
-                          onChange={(e) =>
-                            handleInputChange("expiryYear", e.target.value)
+                          onChange={e =>
+                            handleInputChange('expiryYear', e.target.value)
                           }
                           className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                         >
@@ -496,7 +496,7 @@ export default function Checkout() {
                           {Array.from(
                             { length: 10 },
                             (_, i) => new Date().getFullYear() + i
-                          ).map((year) => (
+                          ).map(year => (
                             <option key={year} value={year}>
                               {year}
                             </option>
@@ -513,8 +513,8 @@ export default function Checkout() {
                           placeholder="123"
                           maxLength={4}
                           value={formData.cvv}
-                          onChange={(e) =>
-                            handleInputChange("cvv", e.target.value)
+                          onChange={e =>
+                            handleInputChange('cvv', e.target.value)
                           }
                           className="w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent"
                         />
@@ -614,7 +614,7 @@ export default function Checkout() {
 
               {/* Cart Items */}
               <div className="space-y-4 mb-6">
-                {cartItems.map((item) => (
+                {cartItems.map(item => (
                   <div key={item.id} className="flex items-center space-x-4">
                     <div className="w-16 h-16 relative flex-shrink-0">
                       <Image
@@ -636,7 +636,7 @@ export default function Checkout() {
                       <p className="font-semibold text-earth-brown">
                         $
                         {(
-                          parseInt(item.product.price.replace(/[^0-9]/g, "")) *
+                          parseInt(item.product.price.replace(/[^0-9]/g, '')) *
                           item.quantity
                         ).toLocaleString()}
                       </p>

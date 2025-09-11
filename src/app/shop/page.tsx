@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useArtwork } from "@/hooks/useArtwork";
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import { useArtwork } from '@/hooks/useArtwork';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const categories = [
-  "All",
-  "Landscape",
-  "Portrait",
-  "Abstract",
-  "My Mini",
-  "Still Life",
+  'All',
+  'Landscape',
+  'Portrait',
+  'Abstract',
+  'My Mini',
+  'Still Life',
 ];
 const sortOptions = [
-  { value: "featured", label: "Featured" },
-  { value: "price-low", label: "Price: Low to High" },
-  { value: "price-high", label: "Price: High to Low" },
-  { value: "name", label: "Name A-Z" },
-  { value: "newest", label: "Newest First" },
+  { value: 'featured', label: 'Featured' },
+  { value: 'price-low', label: 'Price: Low to High' },
+  { value: 'price-high', label: 'Price: High to Low' },
+  { value: 'name', label: 'Name A-Z' },
+  { value: 'newest', label: 'Newest First' },
 ];
 
 export default function Shop() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [sortBy, setSortBy] = useState("createdAt");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sortBy, setSortBy] = useState('createdAt');
+  const [searchQuery, setSearchQuery] = useState('');
   const [cart, setCart] = useState<Array<{ id: number; quantity: number }>>([]);
   const [showCart, setShowCart] = useState(false);
 
@@ -34,13 +34,13 @@ export default function Shop() {
     loading,
     error,
   } = useArtwork({
-    sortBy: sortBy === "featured" ? "createdAt" : sortBy,
-    sortOrder: sortBy === "price-low" ? "asc" : "desc",
+    sortBy: sortBy === 'featured' ? 'createdAt' : sortBy,
+    sortOrder: sortBy === 'price-low' ? 'asc' : 'desc',
   });
 
   // Load cart from localStorage on component mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("art-cart");
+    const savedCart = localStorage.getItem('art-cart');
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
@@ -48,14 +48,14 @@ export default function Shop() {
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("art-cart", JSON.stringify(cart));
+    localStorage.setItem('art-cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (productId: number) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === productId);
+    setCart(prevCart => {
+      const existingItem = prevCart.find(item => item.id === productId);
       if (existingItem) {
-        return prevCart.map((item) =>
+        return prevCart.map(item =>
           item.id === productId
             ? { ...item, quantity: item.quantity + 1 }
             : item
@@ -67,15 +67,15 @@ export default function Shop() {
   };
 
   const removeFromCart = (productId: number) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+    setCart(prevCart => prevCart.filter(item => item.id !== productId));
   };
 
   const updateQuantity = (productId: number, quantity: number) => {
     if (quantity <= 0) {
       removeFromCart(productId);
     } else {
-      setCart((prevCart) =>
-        prevCart.map((item) =>
+      setCart(prevCart =>
+        prevCart.map(item =>
           item.id === productId ? { ...item, quantity } : item
         )
       );
@@ -84,15 +84,15 @@ export default function Shop() {
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
   const cartTotal = cart.reduce((total, item) => {
-    const product = products.find((p) => p.id === item.id);
-    const price = product ? parseInt(product.price.replace(/[^0-9]/g, "")) : 0;
+    const product = products.find(p => p.id === item.id);
+    const price = product ? parseInt(product.price.replace(/[^0-9]/g, '')) : 0;
     return total + price * item.quantity;
   }, 0);
 
   const filteredProducts = products
-    .filter((product) => {
+    .filter(product => {
       const matchesCategory =
-        selectedCategory === "All" || product.category === selectedCategory;
+        selectedCategory === 'All' || product.category === selectedCategory;
       const matchesSearch =
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.medium.toLowerCase().includes(searchQuery.toLowerCase());
@@ -100,19 +100,19 @@ export default function Shop() {
     })
     .sort((a, b) => {
       switch (sortBy) {
-        case "price-low":
+        case 'price-low':
           return (
-            parseInt(a.price.replace(/[^0-9]/g, "")) -
-            parseInt(b.price.replace(/[^0-9]/g, ""))
+            parseInt(a.price.replace(/[^0-9]/g, '')) -
+            parseInt(b.price.replace(/[^0-9]/g, ''))
           );
-        case "price-high":
+        case 'price-high':
           return (
-            parseInt(b.price.replace(/[^0-9]/g, "")) -
-            parseInt(a.price.replace(/[^0-9]/g, ""))
+            parseInt(b.price.replace(/[^0-9]/g, '')) -
+            parseInt(a.price.replace(/[^0-9]/g, ''))
           );
-        case "name":
+        case 'name':
           return a.title.localeCompare(b.title);
-        case "newest":
+        case 'newest':
           return (
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
@@ -175,8 +175,8 @@ export default function Shop() {
               ) : (
                 <>
                   <div className="space-y-4 mb-6">
-                    {cart.map((item) => {
-                      const product = products.find((p) => p.id === item.id);
+                    {cart.map(item => {
+                      const product = products.find(p => p.id === item.id);
                       if (!product) return null;
 
                       return (
@@ -277,21 +277,21 @@ export default function Shop() {
                 type="text"
                 placeholder="Search artwork..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-2 border border-peach rounded-lg focus:ring-2 focus:ring-earth-green focus:border-transparent bg-white/70"
               />
             </div>
 
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
+              {categories.map(category => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                     selectedCategory === category
-                      ? "bg-earth-green text-white"
-                      : "bg-peach text-earth-brown-2 hover:bg-peach-light"
+                      ? 'bg-earth-green text-white'
+                      : 'bg-peach text-earth-brown-2 hover:bg-peach-light'
                   }`}
                 >
                   {category}
@@ -303,10 +303,10 @@ export default function Shop() {
             <div className="flex items-center gap-4">
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                onChange={e => setSortBy(e.target.value)}
                 className="border border-peach rounded-md px-3 py-2 text-sm text-earth-brown bg-white focus:outline-none focus:ring-2 focus:ring-earth-green focus:border-transparent"
               >
-                {sortOptions.map((option) => (
+                {sortOptions.map(option => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -362,7 +362,7 @@ export default function Shop() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredProducts.map((product) => (
+              {filteredProducts.map(product => (
                 <div
                   key={product.id}
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
@@ -401,7 +401,7 @@ export default function Shop() {
                         </span>
                       </div>
                       <span className="text-sm text-earth-green font-medium">
-                        {product.available ? "Available" : "Sold"}
+                        {product.available ? 'Available' : 'Sold'}
                       </span>
                     </div>
 
@@ -417,7 +417,7 @@ export default function Shop() {
                         disabled={!product.available}
                         className="flex-1 bg-earth-green text-white py-2 px-4 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {product.available ? "Add to Cart" : "Sold"}
+                        {product.available ? 'Add to Cart' : 'Sold'}
                       </button>
                     </div>
                   </div>
