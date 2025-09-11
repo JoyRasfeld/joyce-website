@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display } from 'next/font/google';
-import Navigation from '../components/Navigation';
+import { Toaster } from 'sonner';
+import Navigation from '@/components/navigation';
 import './globals.css';
 
 const playfairDisplay = Playfair_Display({
@@ -27,6 +28,7 @@ export default function RootLayout({
       >
         <Navigation />
         <main>{children}</main>
+        <Toaster position="top-right" />
         <footer className="bg-peach border-t border-peach">
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
