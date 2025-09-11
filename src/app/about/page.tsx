@@ -40,11 +40,12 @@ export default function About() {
                 emotions, and the world around me.
               </p>
               <p className="text-lg text-earth-brown-2">
-                When I'm not creating, I enjoy time at home with my husband, our
-                two young children and a lively household of four cats. I
-                believe that art has the power to transform spaces and touch
-                hearts, and I'm honored to share my work with collectors who
-                appreciate the beauty and meaning behind each brushstroke.
+                When I&apos;m not creating, I enjoy time at home with my
+                husband, our two young children and a lively household of four
+                cats. I believe that art has the power to transform spaces and
+                touch hearts, and I&apos;m honored to share my work with
+                collectors who appreciate the beauty and meaning behind each
+                brushstroke.
               </p>
             </div>
             <div className="relative">
