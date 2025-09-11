@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useArtwork } from "@/hooks/useArtwork";
-import Image from "next/image";
-import Link from "next/link";
+import { useArtwork } from '@/hooks/useArtwork';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   const {
@@ -11,8 +11,8 @@ export default function Home() {
     error,
   } = useArtwork({
     limit: 3,
-    sortBy: "createdAt",
-    sortOrder: "desc",
+    sortBy: 'createdAt',
+    sortOrder: 'desc',
   });
 
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center bg-homepage py-20">
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: "rgba(255,255,255,0)" }}
+          style={{ backgroundColor: 'rgba(255,255,255,0)' }}
         ></div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-7xl font-bold text-earth-brown mb-6">
@@ -104,7 +104,7 @@ export default function Home() {
               </div>
             ) : (
               // Actual artwork
-              featuredArtwork.map((artwork) => (
+              featuredArtwork.map(artwork => (
                 <div key={artwork.id} className="group cursor-pointer">
                   <div className="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                     <div className="aspect-[4/5] relative">

@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
-import { Playfair_Display } from "next/font/google";
-import Navigation from "../components/Navigation";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Playfair_Display } from 'next/font/google';
+import Navigation from '../components/Navigation';
+import './globals.css';
 
 const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair-display",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-playfair-display',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Joyce Art Studio - Original Artwork & Commissions",
+  title: 'Joyce Art Studio - Original Artwork & Commissions',
   description:
-    "Discover unique original artwork and commissions by Joyce. Browse our collection of paintings, drawings, and custom pieces.",
+    'Discover unique original artwork and commissions by Joyce. Browse our collection of paintings, drawings, and custom pieces.',
 };
 
 export default function RootLayout({

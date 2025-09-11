@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   /* Soft peach background with warm brown foreground for earth-tone theme */
@@ -28,7 +28,8 @@ body {
 /* Layered soft pink and lavender accents reminiscent of florals */
 .bg-peach-floral {
   background-color: #fcebdd;
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       1200px 600px at 10% 10%,
       rgba(225, 170, 190, 0.18),
       rgba(225, 170, 190, 0) 60%
