@@ -14,7 +14,7 @@ export default function Home() {
     error,
   } = useArtwork({
     limit: 3,
-    sortBy: 'createdAt',
+    sortBy: 'completedAt',
     sortOrder: 'desc',
   });
 

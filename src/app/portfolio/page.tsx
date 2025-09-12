@@ -47,18 +47,16 @@ export default function Portfolio() {
         selectedCategory === 'All' || artwork.category === selectedCategory
     )
     .sort((a, b) => {
-      if (sortBy === 'newest') return b.year - a.year;
-      if (sortBy === 'oldest') return a.year - b.year;
-      if (sortBy === 'price-low')
+      if (sortBy === 'newest')
         return (
-          parseInt(a.price.replace(/[^0-9]/g, '')) -
-          parseInt(b.price.replace(/[^0-9]/g, ''))
+          new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
         );
-      if (sortBy === 'price-high')
+      if (sortBy === 'oldest')
         return (
-          parseInt(b.price.replace(/[^0-9]/g, '')) -
-          parseInt(a.price.replace(/[^0-9]/g, ''))
+          new Date(a.completedAt).getTime() - new Date(b.completedAt).getTime()
         );
+      if (sortBy === 'title-a-z') return a.title.localeCompare(b.title);
+      if (sortBy === 'title-z-a') return b.title.localeCompare(a.title);
       return 0;
     });
 
@@ -113,7 +111,7 @@ export default function Portfolio() {
                     {selectedImage.price}
                   </p>
                   <span className="text-gray-300 text-sm">
-                    {selectedImage.year}
+                    {new Date(selectedImage.completedAt).getFullYear()}
                   </span>
                 </div>
               </div>
@@ -169,8 +167,8 @@ export default function Portfolio() {
               >
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
+                <option value="title-a-z">Title: A to Z</option>
+                <option value="title-z-a">Title: Z to A</option>
               </select>
             </div>
           </div>
@@ -189,8 +187,8 @@ export default function Portfolio() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {filteredArtwork.map(artwork => (
-                <div key={artwork.id} className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white">
+                <div key={artwork.id} className="group cursor-pointer h-full">
+                  <div className="relative overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white h-full flex flex-col">
                     <div
                       className="aspect-[4/5] relative cursor-pointer"
                       onClick={() => setSelectedImage(artwork)}
@@ -204,7 +202,7 @@ export default function Portfolio() {
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
                     </div>
 
-                    <div className="p-6">
+                    <div className="p-6 flex flex-col flex-grow">
                       <h3 className="text-xl font-semibold text-earth-brown mb-2 group-hover:text-earth-green transition-colors duration-200">
                         {artwork.title}
                       </h3>
@@ -214,9 +212,9 @@ export default function Portfolio() {
                       <p className="text-earth-brown-2 text-sm mb-2">
                         {artwork.dimensions}
                       </p>
-                      <div className="flex justify-end">
+                      <div className="flex justify-end mt-auto">
                         <span className="text-sm text-earth-green">
-                          {artwork.year}
+                          {new Date(artwork.completedAt).getFullYear()}
                         </span>
                       </div>
                     </div>

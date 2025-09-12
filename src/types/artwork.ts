@@ -6,7 +6,7 @@ export interface Artwork {
   price: string;
   imageUrl: string;
   category: string;
-  year: number;
+  completedAt: string;
   available: boolean;
   createdAt: string;
   updatedAt: string;

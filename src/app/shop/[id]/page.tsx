@@ -169,7 +169,7 @@ export default function ProductDetail() {
                 <div className="flex items-center gap-4 text-sm text-earth-brown-2">
                   <span>{product.category}</span>
                   <span>•</span>
-                  <span>{product.year}</span>
+                  <span>{new Date(product.completedAt).getFullYear()}</span>
                   <span>•</span>
                   <span>{product.available ? 'Available' : 'Sold'}</span>
                 </div>
@@ -225,7 +225,7 @@ export default function ProductDetail() {
                     This original artwork by Joyce showcases{' '}
                     {product.medium.toLowerCase()} techniques. The piece
                     measures {product.dimensions} and was created in{' '}
-                    {product.year}.
+                    {new Date(product.completedAt).getFullYear()}.
                   </p>
                 </div>
 

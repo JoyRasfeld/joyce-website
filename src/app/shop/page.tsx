@@ -398,7 +398,8 @@ export default function Shop() {
                       {product.medium} • {product.dimensions}
                     </p>
                     <p className="text-sm text-earth-brown-2 mb-2">
-                      {product.category} • {product.year}
+                      {product.category} •{' '}
+                      {new Date(product.completedAt).getFullYear()}
                     </p>
 
                     <div className="flex justify-between items-center mb-4">

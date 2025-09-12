@@ -16,17 +16,17 @@ datasource db {
 }
 
 model Artwork {
-  id        Int      @id @default(autoincrement())
-  title     String
-  medium    String
-  dimensions String
-  price     String
-  imageUrl  String
-  category  String
-  year      Int
-  available Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String
+  medium      String
+  dimensions  String
+  price       String
+  imageUrl    String
+  category    String
+  completedAt DateTime
+  available   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("artworks")
 }
