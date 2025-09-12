@@ -22,7 +22,7 @@ export default function Contact() {
       {/* Contact Form and Info */}
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-12 justify-center">
+          <div className="flex flex-col lg:flex-row gap-12 justify-center">
             {/* Contact Form */}
             <ContactForm />
 
