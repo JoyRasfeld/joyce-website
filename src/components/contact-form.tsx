@@ -6,6 +6,12 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Typography } from '@/components/ui/typography';
+
 // Contact form validation schema
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -63,49 +69,37 @@ export function ContactForm({ className }: ContactFormProps) {
 
   return (
     <div className={className}>
-      <h2 className="text-3xl font-bold text-earth-brown mb-6">
+      <Typography variant="h2" className="mb-6">
         Send a Message
-      </h2>
+      </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-earth-brown-2 mb-2"
-            >
-              Name *
-            </label>
-            <input
+            <Label htmlFor="name">Name *</Label>
+            <Input
               id="name"
               type="text"
               placeholder="Your name"
               {...register('name')}
-              className={`w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70 text-earth-brown placeholder:text-earth-brown-2 ${
-                errors.name ? 'border-red-500' : ''
-              }`}
+              className={errors.name ? 'border-destructive' : ''}
             />
             {errors.name && (
-              <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>
+              <p className="text-sm text-destructive mt-1">
+                {errors.name.message}
+              </p>
             )}
           </div>
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-earth-brown-2 mb-2"
-            >
-              Email *
-            </label>
-            <input
+            <Label htmlFor="email">Email *</Label>
+            <Input
               id="email"
               type="email"
               placeholder="your@email.com"
               {...register('email')}
-              className={`w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70 text-earth-brown placeholder:text-earth-brown-2 ${
-                errors.email ? 'border-red-500' : ''
-              }`}
+              className={errors.email ? 'border-destructive' : ''}
             />
             {errors.email && (
-              <p className="text-sm text-red-600 mt-1">
+              <p className="text-sm text-destructive mt-1">
                 {errors.email.message}
               </p>
             )}
@@ -113,58 +107,44 @@ export function ContactForm({ className }: ContactFormProps) {
         </div>
 
         <div>
-          <label
-            htmlFor="subject"
-            className="block text-sm font-medium text-earth-brown-2 mb-2"
-          >
-            Subject *
-          </label>
-          <input
+          <Label htmlFor="subject">Subject *</Label>
+          <Input
             id="subject"
             type="text"
             placeholder="Project Inquiry"
             {...register('subject')}
-            className={`w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70 text-earth-brown placeholder:text-earth-brown-2 ${
-              errors.subject ? 'border-red-500' : ''
-            }`}
+            className={errors.subject ? 'border-destructive' : ''}
           />
           {errors.subject && (
-            <p className="text-sm text-red-600 mt-1">
+            <p className="text-sm text-destructive mt-1">
               {errors.subject.message}
             </p>
           )}
         </div>
 
         <div>
-          <label
-            htmlFor="message"
-            className="block text-sm font-medium text-earth-brown-2 mb-2"
-          >
-            Message *
-          </label>
-          <textarea
+          <Label htmlFor="message">Message *</Label>
+          <Textarea
             id="message"
             placeholder="Tell me about your inquiry..."
             rows={6}
-            className={`w-full px-4 py-3 border border-peach rounded-lg focus:ring-2 focus:ring-[#3f6f54] focus:border-transparent bg-white/70 resize-none text-earth-brown placeholder:text-earth-brown-2 ${
-              errors.message ? 'border-red-500' : ''
-            }`}
+            className={errors.message ? 'border-destructive' : ''}
             {...register('message')}
           />
           {errors.message && (
-            <p className="text-sm text-red-600 mt-1">
+            <p className="text-sm text-destructive mt-1">
               {errors.message.message}
             </p>
           )}
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="w-full bg-earth-green text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-3 px-6 font-semibold"
           disabled={isSubmitting || !isValid || !isDirty}
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
-        </button>
+        </Button>
       </form>
     </div>
   );

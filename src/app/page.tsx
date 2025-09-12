@@ -1,8 +1,11 @@
 'use client';
 
-import { useArtwork } from '@/hooks/useArtwork';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { useArtwork } from '@/hooks/useArtwork';
 import { isShopEnabled } from '@/lib/shop';
 
 export default function Home() {
@@ -21,56 +24,41 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-homepage py-20">
-        <div
-          className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(255,255,255,0)' }}
-        ></div>
+      <section className="relative min-h-screen flex items-center justify-center py-12">
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-7xl font-bold text-earth-brown mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
             Welcome to
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#6b5849] to-[#3f6f54] pb-4">
               Joyce Art Studio
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-earth-brown-2 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
             Experience original artwork that preserves moments, emotions and
             personal stories. Each artwork is crafted crafted with thought and
             heart.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {shopEnabled && (
-              <Link
-                href="/shop"
-                className="bg-earth-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-colors duration-200"
-              >
-                Shop Now
-              </Link>
+              <Button asChild size="xl">
+                <Link href="/shop">Shop Now</Link>
+              </Button>
             )}
-            <Link
-              href="/portfolio"
-              className="bg-earth-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-colors duration-200"
-            >
-              Explore Portfolio
-            </Link>
-            <Link
-              href="/about"
-              className="border-2 border-earth-green text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-earth-green hover:text-white transition-colors duration-200"
-            >
-              Meet the Artist
-            </Link>
+            <Button asChild size="xl">
+              <Link href="/portfolio">Explore Portfolio</Link>
+            </Button>
+            <Button asChild variant="outline" size="xl">
+              <Link href="/about">Meet the Artist</Link>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Featured Artwork Section */}
-      <section className="py-20 bg-homepage">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-earth-brown mb-4">
-              Featured Artwork
-            </h2>
-            <p className="text-xl text-earth-brown-2 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4">Featured Artwork</h2>
+            <p className="text-xl max-w-2xl mx-auto">
               A curated selection of recent pieces showcasing diverse styles and
               techniques
             </p>
@@ -142,38 +130,23 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center text-earth-green hover:opacity-90 font-semibold text-lg"
-            >
-              View All Artwork
-              <svg
-                className="ml-2 w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
+            <Button variant="link" asChild>
+              <Link href="/portfolio">
+                View All Artwork
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* About Preview Section */}
-      <section className="py-20 bg-homepage">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
             <div className="lg:col-span-2">
-              <h2 className="text-4xl font-bold text-earth-brown mb-6">
-                Meet Joyce
-              </h2>
-              <p className="text-lg text-earth-brown-2 mb-6">
+              <h2 className="text-4xl font-bold mb-6">Meet Joyce</h2>
+              <p className="text-lg mb-6">
                 Joyce Rasfeld has been passionate about drawing since childhood,
                 finding creativity to be her natural language of expression. She
                 earned a B.S. in Studio Art and a B.F.A. in Art Education from
@@ -181,50 +154,35 @@ export default function Home() {
                 both a way to understand the world and to share her perspective
                 with others.
               </p>
-              <p className="text-lg text-earth-brown-2 mb-8">
+              <p className="text-lg mb-8">
                 Inspired by the beauty of everyday life, Joyce often draws from
                 the colors, shapes, and spatial relationships she observes in
                 outdoor scenery. When she isn&apos;t creating, she enjoys time
                 at home with her husband, their two young children and a lively
                 household of four cats.
               </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center text-earth-green hover:opacity-90 font-semibold text-lg"
-              >
-                Learn More About Joyce
-                <svg
-                  className="ml-2 w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </Link>
+              <Button variant="link" asChild>
+                <Link href="/about">
+                  Learn More About Joyce
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </Button>
             </div>
-            <div className="relative">
-              <div className="aspect-square rounded-lg overflow-hidden shadow-xl bg-peach w-80 h-80 mx-auto">
-                <Image
-                  src="/images/me.png"
-                  alt="Joyce in her studio"
-                  width={320}
-                  height={320}
-                  className="object-cover w-full h-full"
-                />
-              </div>
+            <div className="aspect-square bg-card rounded-lg overflow-hidden shadow-xl bg-peach w-80 h-80 mx-auto">
+              <Image
+                src="/images/me.png"
+                alt="Joyce in her studio"
+                width={320}
+                height={320}
+                className="object-cover w-full h-full"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-earth-green">
+      <section className="py-20 bg-primary">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Find Your Perfect Piece?
@@ -236,25 +194,16 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {shopEnabled && (
-              <Link
-                href="/shop"
-                className="bg-white text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors duration-200"
-              >
-                Shop Now
-              </Link>
+              <Button asChild variant="secondary" size="xl">
+                <Link href="/shop">Shop Now</Link>
+              </Button>
             )}
-            <Link
-              href="/portfolio"
-              className="bg-white text-earth-green px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors duration-200"
-            >
-              Browse Portfolio
-            </Link>
-            <Link
-              href="/contact"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-earth-green transition-colors duration-200"
-            >
-              Contact Joyce
-            </Link>
+            <Button asChild variant="secondary" size="xl">
+              <Link href="/portfolio">Browse Portfolio</Link>
+            </Button>
+            <Button asChild variant="outline-white" size="xl">
+              <Link href="/contact">Contact Joyce</Link>
+            </Button>
           </div>
         </div>
       </section>

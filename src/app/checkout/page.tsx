@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useArtwork } from '@/hooks/useArtwork';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { Shield } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { useArtwork } from '@/hooks/useArtwork';
 import { isShopEnabled } from '@/lib/shop';
-import { redirect } from 'next/navigation';
 
 interface FormData {
   // Shipping Information
@@ -140,7 +142,7 @@ export default function Checkout() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-peach-floral flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-earth-brown mb-4">
             Loading...
@@ -152,7 +154,7 @@ export default function Checkout() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-peach-floral flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-earth-brown mb-4">
             Error loading products: {error}
@@ -170,7 +172,7 @@ export default function Checkout() {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-peach-floral flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-earth-brown mb-4">
             Your cart is empty
@@ -187,7 +189,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-peach-floral">
+    <div>
       {/* Header */}
       <section className="bg-white/70 backdrop-blur-sm border-b border-peach">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -270,7 +272,7 @@ export default function Checkout() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Form */}
           <div className="lg:col-span-2">
@@ -414,13 +416,9 @@ export default function Checkout() {
                     </div>
                   </div>
                   <div className="mt-6 flex justify-end">
-                    <button
-                      type="button"
-                      onClick={nextStep}
-                      className="bg-earth-green text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200"
-                    >
+                    <Button type="button" onClick={nextStep}>
                       Continue to Payment
-                    </button>
+                    </Button>
                   </div>
                 </div>
               )}
@@ -529,20 +527,10 @@ export default function Checkout() {
                     </div>
                   </div>
                   <div className="mt-6 flex justify-between">
-                    <button
-                      type="button"
-                      onClick={prevStep}
-                      className="bg-peach text-earth-brown px-8 py-3 rounded-lg font-semibold hover:bg-peach-light transition-colors duration-200"
-                    >
+                    <Button onClick={prevStep} variant="secondary">
                       Back
-                    </button>
-                    <button
-                      type="button"
-                      onClick={nextStep}
-                      className="bg-earth-green text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200"
-                    >
-                      Review Order
-                    </button>
+                    </Button>
+                    <Button onClick={nextStep}>Review Order</Button>
                   </div>
                 </div>
               )}
@@ -593,19 +581,17 @@ export default function Checkout() {
                   </div>
 
                   <div className="mt-6 flex justify-between">
-                    <button
+                    <Button
                       type="button"
                       onClick={prevStep}
-                      className="bg-peach text-earth-brown px-8 py-3 rounded-lg font-semibold hover:bg-peach-light transition-colors duration-200"
+                      variant="secondary"
+                      className="px-8 py-3"
                     >
                       Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="bg-earth-green text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200"
-                    >
+                    </Button>
+                    <Button type="submit" className="px-8 py-3">
                       Place Order
-                    </button>
+                    </Button>
                   </div>
                 </div>
               )}
@@ -677,19 +663,7 @@ export default function Checkout() {
               {/* Security Notice */}
               <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <svg
-                    className="w-5 h-5 text-green-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                  <Shield className="w-5 h-5 text-green-600" />
                   <span className="text-sm text-green-800">
                     Secure checkout powered by Stripe
                   </span>

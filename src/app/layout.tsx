@@ -5,7 +5,7 @@ import { Toaster } from 'sonner';
 import './globals.css';
 
 import { Footer } from '@/components/footer';
-import { Navigation } from '@/components/navigation';
+import { Header } from '@/components/header';
 
 const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
@@ -27,11 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfairDisplay.variable} antialiased min-h-screen bg-peach-floral`}
+        className={`${playfairDisplay.variable} antialiased min-h-screen flex flex-col`}
       >
-        <Navigation />
-        <main>{children}</main>
-        <Toaster position="top-right" />
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Toaster position="top-center" />
         <Footer />
         <Analytics />
       </body>
