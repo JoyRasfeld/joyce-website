@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { redirect, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { Button } from '@/components/ui/button';
 import { isShopEnabled } from '@/lib/shop';
 import type { Artwork } from '@/types';
 
@@ -78,7 +79,7 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-peach-floral flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-earth-brown mb-4">
             Loading...
@@ -90,7 +91,7 @@ export default function ProductDetail() {
 
   if (error || !product) {
     return (
-      <div className="min-h-screen bg-peach-floral flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-earth-brown mb-4">
             {error || 'Product Not Found'}
@@ -107,7 +108,7 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-peach-floral">
+    <div>
       {/* Header */}
       <section className="bg-white/70 backdrop-blur-sm border-b border-peach">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -132,7 +133,7 @@ export default function ProductDetail() {
       </section>
 
       {/* Product Details */}
-      <section className="py-12">
+      <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Image */}
@@ -200,13 +201,13 @@ export default function ProductDetail() {
                   </div>
                 </div>
 
-                <button
+                <Button
                   onClick={addToCart}
                   disabled={!product.available}
-                  className="w-full bg-earth-green text-white py-4 px-6 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full"
                 >
                   {product.available ? 'Add to Cart' : 'Sold'}
-                </button>
+                </Button>
 
                 {showAddedMessage && (
                   <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">

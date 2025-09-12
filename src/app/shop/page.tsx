@@ -1,9 +1,12 @@
 'use client';
 
+import { X, Trash2, ShoppingCart, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 import { useArtwork } from '@/hooks/useArtwork';
 import { isShopEnabled } from '@/lib/shop';
 
@@ -129,10 +132,10 @@ export default function Shop() {
     });
 
   return (
-    <div className="min-h-screen bg-peach-floral">
+    <div>
       {/* Header */}
       <section className="bg-white/70 backdrop-blur-sm border-b border-peach">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-earth-brown mb-4">
               Art Shop
@@ -159,19 +162,7 @@ export default function Shop() {
                   onClick={() => setShowCart(false)}
                   className="text-earth-brown-2 hover:text-earth-green"
                 >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <X className="w-6 h-6" />
                 </button>
               </div>
 
@@ -232,19 +223,7 @@ export default function Shop() {
                             onClick={() => removeFromCart(item.id)}
                             className="text-earth-brown-2 hover:text-earth-green"
                           >
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
+                            <Trash2 className="w-5 h-5" />
                           </button>
                         </div>
                       );
@@ -292,17 +271,16 @@ export default function Shop() {
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2">
               {categories.map(category => (
-                <button
+                <Button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                    selectedCategory === category
-                      ? 'bg-earth-green text-white'
-                      : 'bg-peach text-earth-brown-2 hover:bg-peach-light'
-                  }`}
+                  variant={
+                    selectedCategory === category ? 'default' : 'secondary'
+                  }
+                  className="px-4 py-2 rounded-full text-sm font-medium"
                 >
                   {category}
-                </button>
+                </Button>
               ))}
             </div>
 
@@ -320,49 +298,37 @@ export default function Shop() {
                 ))}
               </select>
 
-              <button
+              <Button
                 onClick={() => setShowCart(true)}
-                className="relative bg-earth-green text-white p-3 rounded-lg hover:opacity-90 transition-colors duration-200"
+                className="relative p-3"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
-                  />
-                </svg>
+                <ShoppingCart className="w-6 h-6" />
                 {cartItemCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
                     {cartItemCount}
                   </span>
                 )}
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Product Grid */}
-      <section className="py-12">
+      <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="text-center py-12">
+            <div className="text-center py-8">
               <p className="text-earth-brown-2 text-lg">Loading products...</p>
             </div>
           ) : error ? (
-            <div className="text-center py-12">
+            <div className="text-center py-8">
               <p className="text-red-600 text-lg">
                 Error loading products: {error}
               </p>
             </div>
           ) : filteredProducts.length === 0 ? (
-            <div className="text-center py-12">
+            <div className="text-center py-8">
               <p className="text-earth-brown-2 text-lg">
                 No products found matching your criteria.
               </p>
@@ -414,19 +380,16 @@ export default function Shop() {
                     </div>
 
                     <div className="flex gap-2">
-                      <Link
-                        href={`/shop/${product.id}`}
-                        className="flex-1 bg-peach text-earth-brown py-2 px-4 rounded-lg font-semibold hover:bg-peach-light transition-colors duration-200 text-center"
-                      >
-                        View Details
-                      </Link>
-                      <button
+                      <Button asChild variant="secondary" className="flex-1">
+                        <Link href={`/shop/${product.id}`}>View Details</Link>
+                      </Button>
+                      <Button
                         onClick={() => addToCart(product.id)}
                         disabled={!product.available}
-                        className="flex-1 bg-earth-green text-white py-2 px-4 rounded-lg font-semibold hover:opacity-90 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex-1"
                       >
                         {product.available ? 'Add to Cart' : 'Sold'}
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -438,7 +401,7 @@ export default function Shop() {
 
       {/* Call to Action */}
       <section className="bg-white/70 backdrop-blur-sm border-t border-peach">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-earth-brown mb-4">
               Looking for Something Special?
@@ -453,19 +416,7 @@ export default function Shop() {
               className="inline-flex items-center bg-earth-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-colors duration-200"
             >
               Request a Commission
-              <svg
-                className="ml-2 w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </div>
         </div>

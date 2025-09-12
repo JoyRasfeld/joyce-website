@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import { isShopEnabled } from '@/lib/shop';
 import { redirect } from 'next/navigation';
+import { Check, Mail, MessageCircle, Phone } from 'lucide-react';
+
+import { isShopEnabled } from '@/lib/shop';
 
 export default function CheckoutSuccess() {
   // Redirect if shop is disabled
@@ -8,7 +10,7 @@ export default function CheckoutSuccess() {
     redirect('/');
   }
   return (
-    <div className="min-h-screen bg-peach-floral">
+    <div>
       {/* Header */}
       <section className="bg-white/70 backdrop-blur-sm border-b border-peach">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -19,24 +21,12 @@ export default function CheckoutSuccess() {
       </section>
 
       {/* Success Content */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             {/* Success Icon */}
             <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
-              <svg
-                className="w-12 h-12 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
+              <Check className="w-12 h-12 text-green-600" />
             </div>
 
             {/* Success Message */}
@@ -164,19 +154,7 @@ export default function CheckoutSuccess() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center">
                   <div className="w-12 h-12 bg-peach rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg
-                      className="w-6 h-6 text-earth-green"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
+                    <Mail className="w-6 h-6 text-earth-green" />
                   </div>
                   <h3 className="font-semibold text-earth-brown mb-1">Email</h3>
                   <p className="text-sm text-earth-brown-2">
@@ -185,38 +163,14 @@ export default function CheckoutSuccess() {
                 </div>
                 <div className="text-center">
                   <div className="w-12 h-12 bg-peach rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg
-                      className="w-6 h-6 text-earth-green"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
+                    <Phone className="w-6 h-6 text-earth-green" />
                   </div>
                   <h3 className="font-semibold text-earth-brown mb-1">Phone</h3>
                   <p className="text-sm text-earth-brown-2">(555) 123-4567</p>
                 </div>
                 <div className="text-center">
                   <div className="w-12 h-12 bg-peach rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg
-                      className="w-6 h-6 text-earth-green"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                      />
-                    </svg>
+                    <MessageCircle className="w-6 h-6 text-earth-green" />
                   </div>
                   <h3 className="font-semibold text-earth-brown mb-1">
                     Live Chat
