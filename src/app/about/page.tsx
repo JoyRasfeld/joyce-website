@@ -109,13 +109,13 @@ export default function About() {
       </section>
 
       {/* Studio */}
-      {/* <section className="py-20">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=450&fit=crop"
+                  src="https://res.cloudinary.com/dw3nx5fen/image/upload/v1760307207/IMG_5195_o7plez.jpg"
                   alt="Joyce's studio"
                   width={600}
                   height={450}
@@ -124,30 +124,16 @@ export default function About() {
               </div>
             </div>
             <div>
-              <h2 className="text-3xl font-bold mb-6">
-                My Studio
-              </h2>
+              <h2 className="text-3xl font-bold mb-6">My Studio</h2>
               <p className="text-lg mb-6">
-                Located in the heart of the art community, my studio is a space
-                where creativity knows no bounds. Natural light floods through
-                large windows, creating the perfect environment for painting and
-                drawing.
-              </p>
-              <p className="text-lg mb-6">
-                Every corner of the studio is filled with inspiration - from my
-                collection of art books and reference materials to the carefully
-                organized palette of paints and brushes that I use to bring my
-                visions to life.
-              </p>
-              <p className="text-lg">
-                I welcome visitors by appointment, as I believe that seeing the
-                creative process firsthand helps collectors connect more deeply
-                with the artwork they choose to bring into their homes.
+                My studio is a dedicated room in our home where creativity flows
+                freely. Natural light streams through the windows, creating the
+                perfect environment for painting and drawing.
               </p>
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Process */}
       <section className="py-12">
