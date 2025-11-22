@@ -1,11 +1,53 @@
+import type { Metadata } from 'next';
 import { MapPin, Mail } from 'lucide-react';
 
 import { ContactForm } from '@/components/contact-form';
 import { Typography } from '@/components/ui/typography';
+import { contactStructuredData, stringifyJsonLd } from '@/lib/structured-data';
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://joyceartstudio.com';
+
+export const metadata: Metadata = {
+  title: 'Contact Joyce - Commission & Inquiries',
+  description:
+    'Get in touch with Joyce Rasfeld for artwork inquiries, custom commissions, 3D modeling, 3D printing services, or questions about available pieces. Located in West Chester, OH.',
+  keywords: [
+    'Contact Joyce Rasfeld',
+    'Art Commissions',
+    'Custom Artwork',
+    'Art Inquiries',
+    '3D Modeling Services',
+    '3D Printing Services',
+    'Custom 3D Models',
+    'West Chester Artist',
+    'Ohio Artist',
+  ],
+  alternates: {
+    canonical: `${siteUrl}/contact`,
+  },
+  openGraph: {
+    title: 'Contact Joyce Rasfeld - Commission & Inquiries',
+    description:
+      'Get in touch with Joyce Rasfeld for artwork inquiries, custom commissions, 3D modeling, 3D printing services, or questions about available pieces. Located in West Chester, OH.',
+    url: `${siteUrl}/contact`,
+  },
+  twitter: {
+    title: 'Contact Joyce Rasfeld - Commission & Inquiries',
+    description:
+      'Get in touch with Joyce Rasfeld for artwork inquiries, custom commissions, 3D modeling, 3D printing services, or questions about available pieces. Located in West Chester, OH.',
+  },
+};
 
 export default function Contact() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: stringifyJsonLd(contactStructuredData),
+        }}
+      />
       {/* Hero Section */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

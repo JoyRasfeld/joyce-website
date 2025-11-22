@@ -1,9 +1,55 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Earth, Heart, Sun } from 'lucide-react';
+
+import { aboutStructuredData, stringifyJsonLd } from '@/lib/structured-data';
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://joyceartstudio.com';
+
+export const metadata: Metadata = {
+  title: 'About Joyce - Artist & Creator',
+  description:
+    'Learn about Joyce Rasfeld, a professional artist with a B.S. in Studio Art and B.F.A. in Art Education from Miami University. Specializing in paintings, drawings, 3D modeling, and 3D printing. Discover her journey, inspiration, and creative process.',
+  keywords: [
+    'About Joyce Rasfeld',
+    'Artist Background',
+    'Miami University Art',
+    'Art Education',
+    'Artist Journey',
+    'Creative Process',
+    'Art Inspiration',
+    '3D Modeling',
+    '3D Printing',
+    '3D Artist',
+    'Digital Art',
+    '3D Design',
+  ],
+  alternates: {
+    canonical: `${siteUrl}/about`,
+  },
+  openGraph: {
+    title: 'About Joyce Rasfeld - Artist & Creator',
+    description:
+      'Learn about Joyce Rasfeld, a professional artist with a B.S. in Studio Art and B.F.A. in Art Education from Miami University. Specializing in paintings, drawings, 3D modeling, and 3D printing. Discover her journey, inspiration, and creative process.',
+    url: `${siteUrl}/about`,
+  },
+  twitter: {
+    title: 'About Joyce Rasfeld - Artist & Creator',
+    description:
+      'Learn about Joyce Rasfeld, a professional artist with a B.S. in Studio Art and B.F.A. in Art Education from Miami University. Specializing in paintings, drawings, 3D modeling, and 3D printing. Discover her journey, inspiration, and creative process.',
+  },
+};
 
 export default function About() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: stringifyJsonLd(aboutStructuredData),
+        }}
+      />
       {/* Hero Section */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

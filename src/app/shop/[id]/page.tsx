@@ -7,6 +7,11 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { isShopEnabled } from '@/lib/shop';
+import {
+  createArtworkStructuredData,
+  createBreadcrumbStructuredData,
+  stringifyJsonLd,
+} from '@/lib/structured-data';
 import type { Artwork } from '@/types';
 
 export default function ProductDetail() {
@@ -107,8 +112,39 @@ export default function ProductDetail() {
     );
   }
 
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://joyceartstudio.com';
+
+  const artworkStructuredData = product
+    ? createArtworkStructuredData(product)
+    : null;
+
+  const breadcrumbStructuredData = product
+    ? createBreadcrumbStructuredData([
+        { name: 'Home', url: siteUrl },
+        { name: 'Shop', url: `${siteUrl}/shop` },
+        { name: product.title, url: `${siteUrl}/shop/${product.id}` },
+      ])
+    : null;
+
   return (
     <div>
+      {artworkStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: stringifyJsonLd(artworkStructuredData),
+          }}
+        />
+      )}
+      {breadcrumbStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: stringifyJsonLd(breadcrumbStructuredData),
+          }}
+        />
+      )}
       {/* Header */}
       <section className="bg-white/70 backdrop-blur-sm border-b border-peach">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
