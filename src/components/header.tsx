@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 
@@ -19,7 +20,17 @@ export function Header() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold hover:text-primary">
+            <Link
+              href="/"
+              className="flex items-center gap-4 text-2xl font-bold hover:text-primary"
+            >
+              <Image
+                alt="Joyce Art Studio"
+                src="/images/logo.png"
+                width={48}
+                height={48}
+                priority
+              />
               Joyce Art Studio
             </Link>
           </div>
