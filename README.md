@@ -1,12 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Joyce Art Studio
+
+Portfolio and custom order website for Joyce Art Studio built with Next.js 16.
+
+## Features
+
+- **Portfolio** — Filterable gallery of artwork loaded from PostgreSQL
+- **Shop** — Custom order flow for miniature houses, animal magnets, and framed houses with image uploads, Stripe checkout, and order confirmation emails
+- **Contact** — Contact form powered by Resend
+- **SEO** — JSON-LD structured data, Open Graph images, and meta tags
+
+## Tech Stack
+
+- **Next.js 16** (App Router) with React 19 and TypeScript
+- **Prisma** with PostgreSQL
+- **TailwindCSS 4** with oklch color tokens and shadcn/ui
+- **Stripe** for payments
+- **Cloudinary** for image hosting and uploads
+- **Resend** for transactional emails
+- **Zod** + **react-hook-form** for validation
+- Deployed on **Vercel**
 
 ## Quick Start
 
-1. **Clone and install dependencies:**
+1. **Install dependencies:**
 
    ```bash
-   git clone <your-repo-url>
-   cd joyce-website
    npm install
    ```
 
@@ -14,14 +32,17 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
    ```bash
    cp .env.example .env
-   # Edit .env with your credentials
    ```
+
+   Fill in values for `DATABASE_URL`, `RESEND_API_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, and `NEXT_PUBLIC_SITE_URL`. Set `NEXT_PUBLIC_SHOP_ENABLED="true"` to enable the shop.
 
 3. **Set up the database:**
 
    ```bash
+   npm run db:start       # Start local PostgreSQL
    npx prisma generate
    npx prisma migrate dev
+   npm run db:seed         # Optional: seed with sample data
    ```
 
 4. **Start the development server:**
@@ -30,63 +51,92 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
    npm run dev
    ```
 
-5. **Open [http://localhost:3000](http://localhost:3000)** with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000).
 
-## Getting Started
+## Testing Stripe Webhooks Locally
 
-First, run the development server:
+The shop checkout flow requires Stripe webhooks to mark orders as paid. To test this locally:
 
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Database Setup
-
-### 1. Set up Environment Variables
-
-1. Copy the example environment file:
+1. **Install the Stripe CLI:**
 
    ```bash
-   cp .env.example .env
+   # macOS
+   brew install stripe/stripe-cli/stripe
+
+   # Other platforms: https://docs.stripe.com/stripe-cli
    ```
 
-2. Update your `.env` file with your actual credentials:
-   - Add your PostgreSQL database URL
+2. **Log in to your Stripe account:**
 
-See `.env.example` for detailed descriptions of each variable.
+   ```bash
+   stripe login
+   ```
 
-### 2. Set up Database
+3. **Forward webhook events to your local server:**
 
-The project uses Prisma PostgreSQL for user data persistence:
+   ```bash
+   stripe listen --forward-to localhost:3000/api/webhooks/stripe
+   ```
+
+4. **Copy the webhook signing secret** printed by the CLI (starts with `whsec_`) and set it as `STRIPE_WEBHOOK_SECRET` in your `.env` file. Restart your dev server.
+
+5. **Place a test order** through the shop. The CLI will forward Stripe events to your local endpoint and you should see `[200]` responses.
+
+> **Note:** The CLI generates a new signing secret each time you run `stripe listen`. Update your `.env` if you restart it.
+
+## Scripts
 
 ```bash
-# Install dependencies
-npm install
+npm run dev              # Start dev server (Turbopack, port 3000)
+npm run build            # Production build (runs prisma generate first)
+npm run lint             # ESLint check
+npm run lint:fix         # ESLint auto-fix
+npm run format           # Prettier format
+npm run format:check     # Prettier check
 
-# Generate Prisma client
-npx prisma generate --no-engine
-
-# Run database migrations
-npx prisma migrate dev
+# Database
+npm run db:start         # Start local PostgreSQL
+npm run db:stop          # Stop local PostgreSQL
+npm run db:migrate       # Run Prisma migrations
+npm run db:seed          # Seed database
+npm run db:studio        # Open Prisma Studio
 ```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/                   # Pages and API routes (App Router)
+    api/
+      artwork/           # GET artwork listings
+      contact/           # POST contact form
+      orders/            # POST create order, GET/PATCH order by ID
+      upload/            # POST image upload to Cloudinary
+      webhooks/stripe/   # POST Stripe webhook handler
+    shop/                # Shop pages (product, review, success)
+    portfolio/           # Portfolio gallery
+    about/               # About page
+    contact/             # Contact page
+  components/            # React components
+    ui/                  # shadcn/ui primitives
+  lib/                   # Utilities (prisma, stripe, cloudinary, orders, products, shop)
+  types/                 # TypeScript types and Zod schemas
+prisma/
+  schema.prisma          # Database schema (Artwork, Order, MyMiniSubmission)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See `.env.example` for full descriptions. Required:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `RESEND_API_KEY` | Resend API key for emails |
+| `STRIPE_SECRET_KEY` | Stripe secret key |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
+| `NEXT_PUBLIC_SITE_URL` | Site URL for redirects (use `http://localhost:3000` locally) |
+| `NEXT_PUBLIC_SHOP_ENABLED` | Set to `"true"` to enable the shop |

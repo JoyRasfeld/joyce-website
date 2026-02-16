@@ -4,32 +4,30 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://joyceartstudio.com';
 
 export const metadata: Metadata = {
-  title: 'Art Shop - Purchase Original Artwork',
+  title: 'Shop - Miniatures & Magnets',
   description:
-    'Shop original artwork by Joyce Rasfeld. Browse available paintings, drawings, 3D models, 3D printed art, and custom pieces. Each artwork is carefully crafted and ready to bring beauty to your space.',
+    'Order custom 3D-printed miniature houses, animal magnets, and framed house art by Joyce Rasfeld. Each piece is hand-painted and made to order.',
   keywords: [
-    'Art Shop',
-    'Buy Art Online',
-    'Original Artwork for Sale',
-    '3D Models for Sale',
+    'Custom Miniatures',
+    'Hand-painted Magnets',
     '3D Printed Art',
-    'Buy 3D Art',
-    'Art Purchase',
-    'Art Gallery Shop',
+    'Custom House Miniature',
+    'Framed House Art',
+    'Animal Magnets',
   ],
   alternates: {
     canonical: `${siteUrl}/shop`,
   },
   openGraph: {
-    title: 'Art Shop - Purchase Original Artwork',
+    title: 'Shop - Miniatures & Magnets',
     description:
-      'Shop original artwork by Joyce Rasfeld. Browse available paintings, drawings, 3D models, 3D printed art, and custom pieces.',
+      'Order custom 3D-printed miniature houses, animal magnets, and framed house art by Joyce Rasfeld.',
     url: `${siteUrl}/shop`,
   },
   twitter: {
-    title: 'Art Shop - Purchase Original Artwork',
+    title: 'Shop - Miniatures & Magnets',
     description:
-      'Shop original artwork by Joyce Rasfeld. Browse available paintings, drawings, 3D models, 3D printed art, and custom pieces.',
+      'Order custom 3D-printed miniature houses, animal magnets, and framed house art by Joyce Rasfeld.',
   },
 };
 

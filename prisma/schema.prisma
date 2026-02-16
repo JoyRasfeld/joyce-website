@@ -30,3 +30,45 @@ model Artwork {
 
   @@map("artworks")
 }
+
+model Order {
+  id                      String      @id @default(cuid())
+  stripeCheckoutSessionId String?     @unique
+  stripePaymentIntentId   String?     @unique
+  productType             ProductType
+  quantity                Int         @default(1)
+  name                    String
+  email                   String
+  phone                   String?
+  notes                   String?
+  imageUrls               String[]
+  shippingName            String?
+  shippingAddressLine1    String?
+  shippingAddressLine2    String?
+  shippingCity            String?
+  shippingState           String?
+  shippingPostalCode      String?
+  shippingCountry         String?
+  amount                  Int // cents
+  status                  OrderStatus @default(DRAFT)
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@map("orders")
+}
+
+enum OrderStatus {
+  DRAFT
+  PENDING_PAYMENT
+  PAID
+  CONFIRMED
+  CANCELLED
+}
+
+enum ProductType {
+  MINIATURE_HOUSE
+  ANIMAL_MAGNETS
+  FRAMED_HOUSE
+}

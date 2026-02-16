@@ -42,11 +42,8 @@ export default function Home() {
                 <Link href="/shop">Shop Now</Link>
               </Button>
             )}
-            <Button asChild size="xl">
-              <Link href="/portfolio">Explore Portfolio</Link>
-            </Button>
             <Button asChild variant="outline" size="xl">
-              <Link href="/about">Meet the Artist</Link>
+              <Link href="/portfolio">Explore Portfolio</Link>
             </Button>
           </div>
         </div>
@@ -184,12 +181,11 @@ export default function Home() {
       <section className="py-20 bg-primary">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Find Your Perfect Piece?
+            Ready for a Custom Piece?
           </h2>
           <p className="text-xl text-white/90 mb-8">
-            Whether you&apos;re looking for a statement piece for your home or a
-            unique gift, explore our collection or inquire about custom
-            commissions.
+            Order a custom miniature house, animal magnets, or framed house
+            artwork. Each piece is hand-painted and made just for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {shopEnabled && (
@@ -197,9 +193,6 @@ export default function Home() {
                 <Link href="/shop">Shop Now</Link>
               </Button>
             )}
-            <Button asChild variant="secondary" size="xl">
-              <Link href="/portfolio">Browse Portfolio</Link>
-            </Button>
             <Button asChild variant="outline-white" size="xl">
               <Link href="/contact">Contact Joyce</Link>
             </Button>

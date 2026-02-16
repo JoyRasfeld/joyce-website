@@ -8,7 +8,7 @@
  */
 export function isShopEnabled(): boolean {
   // Check if SHOP_ENABLED environment variable is truthy
-  const shopEnabled = process.env.SHOP_ENABLED;
+  const shopEnabled = process.env.NEXT_PUBLIC_SHOP_ENABLED;
 
   // Return true only if explicitly set to 'true'
   return shopEnabled === 'true';

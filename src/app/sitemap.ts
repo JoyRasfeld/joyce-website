@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
-import { prisma } from '@/lib/prisma';
+
+import { ALL_PRODUCTS } from '@/lib/products';
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://joyceartstudio.com';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Static pages
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: siteUrl,
@@ -39,26 +39,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic artwork pages
-  let artworkPages: MetadataRoute.Sitemap = [];
-  try {
-    const artworks = await prisma.artwork.findMany({
-      select: {
-        id: true,
-        updatedAt: true,
-        available: true,
-      },
-    });
+  const productPages: MetadataRoute.Sitemap = ALL_PRODUCTS.map(product => ({
+    url: `${siteUrl}/shop/${product.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
 
-    artworkPages = artworks.map(artwork => ({
-      url: `${siteUrl}/shop/${artwork.id}`,
-      lastModified: artwork.updatedAt,
-      changeFrequency: 'monthly' as const,
-      priority: artwork.available ? 0.8 : 0.5,
-    }));
-  } catch (error) {
-    console.error('Error fetching artworks for sitemap:', error);
-  }
-
-  return [...staticPages, ...artworkPages];
+  return [...staticPages, ...productPages];
 }
