@@ -35,13 +35,9 @@ model Order {
   id                      String      @id @default(cuid())
   stripeCheckoutSessionId String?     @unique
   stripePaymentIntentId   String?     @unique
-  productType             ProductType
-  quantity                Int         @default(1)
   name                    String
   email                   String
   phone                   String?
-  notes                   String?
-  imageUrls               String[]
   shippingName            String?
   shippingAddressLine1    String?
   shippingAddressLine2    String?
@@ -49,8 +45,9 @@ model Order {
   shippingState           String?
   shippingPostalCode      String?
   shippingCountry         String?
-  amount                  Int // cents
+  amount                  Int // total in cents, server-calculated
   status                  OrderStatus @default(DRAFT)
+  items                   OrderItem[]
   createdAt               DateTime    @default(now())
   updatedAt               DateTime    @updatedAt
 
@@ -59,11 +56,25 @@ model Order {
   @@map("orders")
 }
 
+model OrderItem {
+  id          String      @id @default(cuid())
+  orderId     String
+  order       Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productType ProductType
+  quantity    Int         @default(1)
+  notes       String?
+  imageUrls   String[]
+  unitPrice   Int // line total in cents (from getProductPrice at checkout time)
+  createdAt   DateTime    @default(now())
+
+  @@index([orderId])
+  @@map("order_items")
+}
+
 enum OrderStatus {
   DRAFT
   PENDING_PAYMENT
   PAID
-  CONFIRMED
   CANCELLED
 }
 

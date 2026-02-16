@@ -5,7 +5,7 @@ Portfolio and custom order website for Joyce Art Studio built with Next.js 16.
 ## Features
 
 - **Portfolio** — Filterable gallery of artwork loaded from PostgreSQL
-- **Shop** — Custom order flow for miniature houses, animal magnets, and framed houses with image uploads, Stripe checkout, and order confirmation emails
+- **Shop** — Cart-based custom order flow for miniature houses, animal magnets, and framed houses with image uploads, multi-item Stripe checkout, and order confirmation emails
 - **Contact** — Contact form powered by Resend
 - **SEO** — JSON-LD structured data, Open Graph images, and meta tags
 
@@ -110,19 +110,21 @@ src/
     api/
       artwork/           # GET artwork listings
       contact/           # POST contact form
-      orders/            # POST create order, GET/PATCH order by ID
+      orders/            # POST create order, GET order by ID
       upload/            # POST image upload to Cloudinary
       webhooks/stripe/   # POST Stripe webhook handler
-    shop/                # Shop pages (product, review, success)
+    shop/                # Shop pages (product, success)
+    cart/                # Cart page (items, customer form, checkout)
     portfolio/           # Portfolio gallery
     about/               # About page
     contact/             # Contact page
   components/            # React components
     ui/                  # shadcn/ui primitives
+  context/               # React context providers (cart)
   lib/                   # Utilities (prisma, stripe, cloudinary, orders, products, shop)
   types/                 # TypeScript types and Zod schemas
 prisma/
-  schema.prisma          # Database schema (Artwork, Order, MyMiniSubmission)
+  schema.prisma          # Database schema (Artwork, Order, OrderItem)
 ```
 
 ## Environment Variables

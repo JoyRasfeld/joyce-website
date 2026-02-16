@@ -55,7 +55,7 @@ export default function Shop() {
                           : `$${(product.basePrice / 100).toFixed(2)}`}
                       </p>
                       <span className="text-primary font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-                        Order Now
+                        View Details
                         <ArrowRight className="w-4 h-4" />
                       </span>
                     </div>

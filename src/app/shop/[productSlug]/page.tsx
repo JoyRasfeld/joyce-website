@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-import { OrderForm } from '@/components/order-form';
+import { ProductForm } from '@/components/product-form';
 import { Typography } from '@/components/ui/typography';
 import { ALL_PRODUCTS, getProduct } from '@/lib/products';
 
@@ -76,7 +76,7 @@ export default async function ProductOrderPage({
               <div className="animate-pulse h-96 bg-muted rounded-lg" />
             }
           >
-            <OrderForm productSlug={productSlug} />
+            <ProductForm productSlug={productSlug} />
           </Suspense>
         </div>
       </section>

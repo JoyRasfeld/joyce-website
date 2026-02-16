@@ -6,6 +6,7 @@ import './globals.css';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { CartProvider } from '@/context/cart-context';
 import { rootStructuredData, stringifyJsonLd } from '@/lib/structured-data';
 
 const playfairDisplay = Playfair_Display({
@@ -111,10 +112,12 @@ export default function RootLayout({
       <body
         className={`${playfairDisplay.variable} antialiased min-h-screen flex flex-col`}
       >
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Toaster position="top-center" />
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Toaster position="top-center" />
+          <Footer />
+        </CartProvider>
         <Analytics />
       </body>
     </html>

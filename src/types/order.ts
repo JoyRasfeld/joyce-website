@@ -1,25 +1,8 @@
 import { z } from 'zod';
 
-export const orderFormSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.email('Please enter a valid email address'),
-  phone: z.string().optional(),
-  notes: z.string().optional(),
-  imageUrls: z
-    .array(z.url())
-    .min(1, 'At least one reference image is required')
-    .max(5, 'Maximum 5 images allowed'),
-  quantity: z.number().int().positive(),
-});
-
-export type OrderFormData = z.infer<typeof orderFormSchema>;
-
-export const createOrderSchema = z.object({
+const cartItemSchema = z.object({
   productSlug: z.enum(['miniature-house', 'animal-magnets', 'framed-house']),
-  name: z.string().min(1).max(200),
-  email: z.email().max(320),
-  phone: z.string().max(30).optional(),
-  notes: z.string().max(2000).optional(),
+  quantity: z.number().int().min(1).max(4).default(1),
   imageUrls: z
     .array(
       z
@@ -31,20 +14,34 @@ export const createOrderSchema = z.object({
     )
     .min(1)
     .max(5),
-  quantity: z.number().int().min(1).max(4).default(1),
+  notes: z.string().max(2000).optional(),
+});
+
+export const createOrderSchema = z.object({
+  items: z.array(cartItemSchema).min(1).max(10),
+  name: z.string().min(1).max(200),
+  email: z.string().email().max(320),
+  phone: z.string().max(30).optional(),
 });
 
 export type CreateOrderInput = z.infer<typeof createOrderSchema>;
+export type CartItemInput = z.infer<typeof cartItemSchema>;
 
-export interface OrderResponse {
+export interface OrderItemResponse {
   id: string;
   productType: string;
   quantity: number;
+  notes: string | null;
+  imageUrls: string[];
+  unitPrice: number;
+}
+
+export interface OrderResponse {
+  id: string;
   name: string;
   email: string;
   phone: string | null;
-  notes: string | null;
-  imageUrls: string[];
+  items: OrderItemResponse[];
   shippingName: string | null;
   shippingAddressLine1: string | null;
   shippingAddressLine2: string | null;

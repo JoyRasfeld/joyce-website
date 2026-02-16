@@ -40,15 +40,17 @@ stripe listen --forward-to localhost:3000/api/webhooks/stripe
 
 **Data flow:** Client components use `useArtwork` hook → fetches `/api/artwork` → Prisma queries PostgreSQL.
 
-**Shop order flow:**
+**Shop cart flow:**
 
-1. User fills out `OrderForm` on `/shop/[productSlug]` (uploads images to Cloudinary via `/api/upload`)
-2. `POST /api/orders` creates an Order (status: DRAFT) and a Stripe Checkout Session, returns checkout URL
-3. Order marked PENDING_PAYMENT, user redirected to Stripe
-4. Stripe webhook (`/api/webhooks/stripe`) handles `checkout.session.completed` → marks order PAID with shipping details
-5. User redirected to `/shop/review/[orderId]` which polls until order is PAID
-6. User confirms → `PATCH /api/orders/[orderId]` → status: CONFIRMED, notification email sent via Resend
-7. Redirect to `/shop/success/[orderId]`
+1. User configures product on `/shop/[productSlug]` (uploads images to Cloudinary via `/api/upload`), clicks "Add to Cart"
+2. `ProductForm` adds item to cart context (localStorage-backed, no DB cart)
+3. User reviews cart on `/cart`, enters contact info, clicks "Proceed to Checkout"
+4. `POST /api/orders` creates Order + OrderItems (status: DRAFT), creates Stripe Checkout Session with multiple line items, returns checkout URL
+5. Order marked PENDING_PAYMENT, user redirected to Stripe
+6. Stripe webhook (`/api/webhooks/stripe`) handles `checkout.session.completed` → marks order PAID, sends notification email via Resend
+7. User redirected to `/shop/success/[orderId]` which verifies PAID status, clears cart, shows confirmation
+
+**Cart state:** Client-side only via React Context + localStorage (`joyce-cart` key). `CartProvider` wraps the app in `layout.tsx`. No auth/DB cart — acceptable for custom art pieces ordered in a single session.
 
 **Feature flag:** Shop pages are gated by `NEXT_PUBLIC_SHOP_ENABLED` env var. Check `src/lib/shop.ts` — pages redirect to home when disabled.
 
@@ -59,7 +61,8 @@ stripe listen --forward-to localhost:3000/api/webhooks/stripe
 ## Prisma Models
 
 - **Artwork** — title, medium, dimensions, price, imageUrl, category, available, completedAt
-- **Order** — productType (enum), quantity, customer info, imageUrls, shipping address, amount (cents), Stripe session/payment IDs, status (DRAFT → PENDING_PAYMENT → PAID → CONFIRMED)
+- **Order** — customer info (name, email, phone), shipping address, amount (total cents), Stripe session/payment IDs, status (DRAFT → PENDING_PAYMENT → PAID), has many OrderItems
+- **OrderItem** — productType (enum), quantity, notes, imageUrls, unitPrice (line total cents), belongs to Order
 
 After modifying `prisma/schema.prisma`, run `npx prisma generate` to update the client and `npx prisma migrate dev` to create a migration.
 
@@ -69,9 +72,11 @@ After modifying `prisma/schema.prisma`, run `npx prisma generate` to update the 
 - `src/app/api/orders/` — Order creation and management
 - `src/app/api/webhooks/stripe/` — Stripe webhook handler
 - `src/app/api/upload/` — Cloudinary image upload
-- `src/app/shop/` — Shop pages (product, review, success)
+- `src/app/shop/` — Shop pages (product, success)
+- `src/app/cart/` — Cart page (items, customer form, checkout)
 - `src/components/ui/` — shadcn/ui components
-- `src/components/` — App components (header, footer, contact-form, custom-order-form, image-upload, quantity-selector, order-summary, artwork-card)
+- `src/components/` — App components (header, footer, contact-form, product-form, image-upload, quantity-selector, order-summary, clear-cart, artwork-card)
+- `src/context/cart-context.tsx` — CartProvider, useCart hook, localStorage sync
 - `src/lib/prisma.ts` — Prisma client singleton
 - `src/lib/stripe.ts` — Stripe client singleton
 - `src/lib/order.ts` — Order CRUD and status transitions

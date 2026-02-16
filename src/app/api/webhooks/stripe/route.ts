@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 
-import { cancelOrder, markOrderPaid } from '@/lib/order';
+import {
+  cancelOrder,
+  getOrderBySessionId,
+  markOrderPaid,
+  sendOrderNotificationEmail,
+} from '@/lib/order';
 import { getStripe } from '@/lib/stripe';
 
 export async function POST(request: NextRequest) {
@@ -43,6 +48,11 @@ export async function POST(request: NextRequest) {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
+
+        // Idempotency: skip if already PAID
+        const existing = await getOrderBySessionId(session.id);
+        if (existing?.status === 'PAID') break;
+
         const paymentIntentId =
           typeof session.payment_intent === 'string'
             ? session.payment_intent
@@ -64,7 +74,7 @@ export async function POST(request: NextRequest) {
               }
             | undefined;
 
-        await markOrderPaid(session.id, paymentIntentId, {
+        const order = await markOrderPaid(session.id, paymentIntentId, {
           name: shipping?.name ?? undefined,
           addressLine1: shipping?.address?.line1 ?? undefined,
           addressLine2: shipping?.address?.line2 ?? undefined,
@@ -73,6 +83,12 @@ export async function POST(request: NextRequest) {
           postalCode: shipping?.address?.postal_code ?? undefined,
           country: shipping?.address?.country ?? undefined,
         });
+
+        try {
+          await sendOrderNotificationEmail(order.id);
+        } catch (emailError) {
+          console.error('Failed to send notification email:', emailError);
+        }
         break;
       }
       case 'checkout.session.expired': {

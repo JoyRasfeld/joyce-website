@@ -17,8 +17,7 @@ const STATUS_LABELS: Record<string, { label: string; className: string }> = {
     label: 'Pending Payment',
     className: 'bg-yellow-100 text-yellow-800',
   },
-  PAID: { label: 'Paid', className: 'bg-blue-100 text-blue-800' },
-  CONFIRMED: { label: 'Confirmed', className: 'bg-green-100 text-green-800' },
+  PAID: { label: 'Confirmed', className: 'bg-green-100 text-green-800' },
   CANCELLED: { label: 'Cancelled', className: 'bg-red-100 text-red-800' },
 };
 
@@ -27,7 +26,6 @@ interface OrderSummaryProps {
 }
 
 export function OrderSummary({ order }: OrderSummaryProps) {
-  const product = getProduct(PRODUCT_TYPE_TO_SLUG[order.productType] ?? '');
   const status = STATUS_LABELS[order.status] ?? STATUS_LABELS.DRAFT;
 
   return (
@@ -44,25 +42,71 @@ export function OrderSummary({ order }: OrderSummaryProps) {
       <div className="bg-card border rounded-lg p-6 space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-sm text-muted-foreground">Product</p>
-            <p className="font-medium">{product?.name ?? order.productType}</p>
+            <p className="text-sm text-muted-foreground">Order ID</p>
+            <p className="font-mono text-sm">{order.id}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Quantity</p>
-            <p className="font-medium">{order.quantity}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Amount</p>
+            <p className="text-sm text-muted-foreground">Total</p>
             <p className="font-medium text-lg">
               ${(order.amount / 100).toFixed(2)}
             </p>
           </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Order ID</p>
-            <p className="font-mono text-sm">{order.id}</p>
-          </div>
         </div>
       </div>
+
+      {/* Items */}
+      {order.items.map(item => {
+        const product = getProduct(
+          PRODUCT_TYPE_TO_SLUG[item.productType] ?? ''
+        );
+
+        return (
+          <div key={item.id} className="bg-card border rounded-lg p-6 space-y-3">
+            <div className="flex items-center justify-between">
+              <h4 className="font-semibold">
+                {product?.name ?? item.productType}
+              </h4>
+              <p className="font-medium">
+                ${(item.unitPrice / 100).toFixed(2)}
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-sm text-muted-foreground">Quantity</p>
+                <p>{item.quantity}</p>
+              </div>
+            </div>
+            {item.notes && (
+              <div>
+                <p className="text-sm text-muted-foreground">Notes</p>
+                <p className="whitespace-pre-wrap">{item.notes}</p>
+              </div>
+            )}
+            {item.imageUrls.length > 0 && (
+              <div>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Reference Images
+                </p>
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                  {item.imageUrls.map((url, i) => (
+                    <div
+                      key={i}
+                      className="aspect-square relative rounded-lg overflow-hidden border"
+                    >
+                      <Image
+                        src={url}
+                        alt={`Reference image ${i + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
 
       <div className="bg-card border rounded-lg p-6 space-y-3">
         <h4 className="font-semibold">Customer Information</h4>
@@ -82,12 +126,6 @@ export function OrderSummary({ order }: OrderSummaryProps) {
             </div>
           )}
         </div>
-        {order.notes && (
-          <div>
-            <p className="text-sm text-muted-foreground">Notes</p>
-            <p className="whitespace-pre-wrap">{order.notes}</p>
-          </div>
-        )}
       </div>
 
       {order.shippingName && (
@@ -109,27 +147,6 @@ export function OrderSummary({ order }: OrderSummaryProps) {
             <br />
             {order.shippingCountry}
           </p>
-        </div>
-      )}
-
-      {order.imageUrls.length > 0 && (
-        <div className="bg-card border rounded-lg p-6 space-y-3">
-          <h4 className="font-semibold">Reference Images</h4>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {order.imageUrls.map((url, i) => (
-              <div
-                key={i}
-                className="aspect-square relative rounded-lg overflow-hidden border"
-              >
-                <Image
-                  src={url}
-                  alt={`Reference image ${i + 1}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
         </div>
       )}
     </div>

@@ -9,15 +9,18 @@ import {
   Mail,
   Menu,
   Palette,
+  ShoppingBag,
   ShoppingCart,
   X,
 } from 'lucide-react';
 
+import { useCart } from '@/context/cart-context';
 import { isShopEnabled } from '@/lib/shop';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const shopEnabled = isShopEnabled();
+  const { itemCount } = useCart();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -42,7 +45,7 @@ export function Header() {
               Joyce Art Studio
             </Link>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 href="/"
@@ -82,8 +85,42 @@ export function Header() {
                 Contact
               </Link>
             </div>
+            {shopEnabled && (
+              <Link
+                href="/cart"
+                className="relative ml-4 hover:text-primary p-2"
+                aria-label="Shopping cart"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {itemCount > 0 && (
+                  <span
+                    suppressHydrationWarning
+                    className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                  >
+                    {itemCount}
+                  </span>
+                )}
+              </Link>
+            )}
           </div>
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            {shopEnabled && (
+              <Link
+                href="/cart"
+                className="relative hover:text-primary p-2"
+                aria-label="Shopping cart"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {itemCount > 0 && (
+                  <span
+                    suppressHydrationWarning
+                    className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                  >
+                    {itemCount}
+                  </span>
+                )}
+              </Link>
+            )}
             <button
               onClick={toggleMobileMenu}
               className="hover:text-primary"
