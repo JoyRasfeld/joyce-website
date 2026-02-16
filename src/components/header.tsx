@@ -3,7 +3,15 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import {
+  Flower,
+  Home,
+  Mail,
+  Menu,
+  Palette,
+  ShoppingCart,
+  X,
+} from 'lucide-react';
 
 import { isShopEnabled } from '@/lib/shop';
 
@@ -17,7 +25,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-card backdrop-blur-sm border-b border-border">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link
@@ -35,37 +43,42 @@ export function Header() {
             </Link>
           </div>
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 href="/"
-                className="hover:text-primary px-3 py-2 text-sm font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-sm font-medium"
               >
+                <Home className="w-4 h-4" />
                 Home
               </Link>
               <Link
                 href="/portfolio"
-                className="hover:text-primary px-3 py-2 text-sm font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-sm font-medium"
               >
+                <Palette className="w-4 h-4" />
                 Portfolio
               </Link>
               {shopEnabled && (
                 <Link
                   href="/shop"
-                  className="hover:text-primary px-3 py-2 text-sm font-medium"
+                  className="flex items-center gap-2 hover:text-primary px-3 py-2 text-sm font-medium"
                 >
+                  <ShoppingCart className="w-4 h-4" />
                   Shop
                 </Link>
               )}
               <Link
                 href="/about"
-                className="hover:text-primary px-3 py-2 text-sm font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-sm font-medium"
               >
+                <Flower className="w-4 h-4" />
                 About
               </Link>
               <Link
                 href="/contact"
-                className="hover:text-primary px-3 py-2 text-sm font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-sm font-medium"
               >
+                <Mail className="w-4 h-4" />
                 Contact
               </Link>
             </div>
@@ -91,39 +104,44 @@ export function Header() {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-border">
               <Link
                 href="/"
-                className="hover:text-primary block px-3 py-2 text-base font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-base font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
+                <Home className="w-4 h-4" />
                 Home
               </Link>
               <Link
                 href="/portfolio"
-                className="hover:text-primary block px-3 py-2 text-base font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-base font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
+                <Palette className="w-4 h-4" />
                 Portfolio
               </Link>
               {shopEnabled && (
                 <Link
                   href="/shop"
-                  className="hover:text-primary block px-3 py-2 text-base font-medium"
+                  className="flex items-center gap-2 hover:text-primary px-3 py-2 text-base font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
+                  <ShoppingCart className="w-4 h-4" />
                   Shop
                 </Link>
               )}
               <Link
                 href="/about"
-                className="hover:text-primary block px-3 py-2 text-base font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-base font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
+                <Flower className="w-4 h-4" />
                 About
               </Link>
               <Link
                 href="/contact"
-                className="hover:text-primary block px-3 py-2 text-base font-medium"
+                className="flex items-center gap-2 hover:text-primary px-3 py-2 text-base font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
+                <Mail className="w-4 h-4" />
                 Contact
               </Link>
             </div>
